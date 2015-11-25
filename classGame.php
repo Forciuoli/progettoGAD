@@ -21,7 +21,7 @@ class Game {
 	public function __construct($name, $link, $publisher, $img_link) {
 		$this->name = $name;
 		$this->link = $link;
-		$this->publisher = $publisher;
+		$this->publisher = $publisher; 
 		$this->img_link = $img_link;
 	}
 	
