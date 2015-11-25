@@ -25,7 +25,7 @@ class Game {
 		$this->img_link = $img_link;
 	}
 	
-	
+	 
 	
 
 }
