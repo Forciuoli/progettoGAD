@@ -32,7 +32,7 @@ $months = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","ago
 			foreach ($dataPlatforms as $data) {
 				$data[0];
 			}
-			if($item -> dateplatforms != )
+			//if($item -> dateplatforms != )
 		}
 			
 		
