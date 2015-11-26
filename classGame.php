@@ -5,11 +5,11 @@ class Game {
 	// variabili
 	public $name;
 	public $link;
-	public $vote_multiplayer = array("all"=>"","ps4"=>"", "xboxone"=>"", "xbox360"=>"","pc"=>"","ps3"=>"");
+	public $vote_multiplayer = array("all"=>"","PlayStation 4"=>"", "Xbox One"=>"", "Xbox 360"=>"","PC Windows"=>"","PlayStation 3"=>"");
 	public $vote_everyeye = array("all"=>"");
 	public $genre = array();
 	public $platform = array();
-	public $data = array("ps4"=>"", "xboxone"=>"", "xbox360"=>"","pc"=>"","ps3"=>"");
+	public $data = array("Ps3"=>"", "Xbox One"=>"", "Xbox 360"=>"","Pc"=>"","PS4"=>"");
 	public $multiplayer;
 	public $cooperative;
 	public $minum_requirements;
