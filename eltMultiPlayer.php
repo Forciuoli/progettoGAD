@@ -1,13 +1,15 @@
 <?php
-set_time_limit(1000000);
-$pepiFree=array();
-for($i=1;$i<13;$i++){
+include "classGame.php";
+set_time_limit(1000000000000);
+$games=array();
+for($kk=1;$kk<4;$kk++){
+for($i=1;$i<500;$i++){
 	if($i==1)
-		$ch = curl_init("https://api.import.io/store/data/647f1b46-43ec-430d-8c0f-b82a184138d0/_query?input/webpage/url=http%3A%2F%2Fmultiplayer.it%2Fgiochi%2F%3Fmonth%3D2015_10&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
+		$ch = curl_init("https://api.import.io/store/data/647f1b46-43ec-430d-8c0f-b82a184138d0/_query?input/webpage/url=http%3A%2F%2Fmultiplayer.it%2Fgiochi%2F%3Fmonth%3D2015_0".$kk."&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
 		else
 		{
 			$link="http://multiplayer.it/giochi/?pagina=".$i."&_=wjums&month=2015_10&querystring_key=pagina";
-			echo $link."</br>";
+			echo $link." ss ".$kk."</br>";
 			$ch = curl_init("https://api.import.io/store/data/647f1b46-43ec-430d-8c0f-b82a184138d0/_query?input/webpage/url=".urlencode($link)."&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
 		}
 
@@ -18,16 +20,57 @@ for($i=1;$i<13;$i++){
 		//echo $result;
 
 		$someObject = json_decode($result);
+		
+		if($i>1 && $someObject->results[0]->{'name/_text'}==$games[0]->name)
+			break;
+		
 		for ($j=0;$j < count($someObject->results);$j++)
 		{
 			//echo $someObject->results[$j]->{'name/_title'}."</br>";
-			$platform = $someObject->results[$j]->{'platform/_text'};
+			$info_game = $someObject->results[$j]->info_game;
 			//echo $link."</br>";
-			echo $platform;
-			if($platform!="Android" && $platform!="iPad" && $platform!="iPhone" && $platform!="Playstation Vita" && $platform!="Nintendo 3DS")
+			$split_info_game = split (" per ", $info_game);
+			if(isset($split_info_game[1]))
 			{
-				array_push($pepiFree,$someObject->results[$j]);
+				$platform=$split_info_game[1];
 			}
+			else
+			{
+				$platform=$split_info_game[0];
+			}
+			if($platform=="Xbox One" || $platform=="PlayStation 4" || $platform=="PC Windows"
+			   || $platform=="PlayStation 3" || $platform=="Xbox 360")
+			{
+				$name=$someObject->results[$j]->{'name/_text'};
+				
+				$link=$someObject->results[$j]->{'name'};
+				if(isset($someObject->results[$j]->{'vote'}))
+				$flag=false;
+				foreach ($games as $gm)
+				{
+					$cocc=$gm->name;
+					if($cocc==$name)
+					{
+						$flag=true;
+						if(isset($someObject->results[$j]->{'vote'}))
+							$gm->vote_multiplayer[$split_info_game[1]]=$someObject->results[$j]->{'vote'};
+					}
+				}
+				if(!$flag)
+				{
+					$game= new Game($name,$link,"","");
+					$split_genre=split(",",$split_info_game[0]);
+					foreach ($split_genre as $genre) {
+						array_push($game->genre,$genre);
+					}
+					if(isset($someObject->results[$j]->{'vote'}))
+						$game->vote_multiplayer[$split_info_game[1]]=$someObject->results[$j]->{'vote'};
+				    array_push($games,  $game);
+				}
+				
+				
+			}
+			
 				
 			//$pos = strpos($gameName, "(");
 			//echo $pos;
@@ -46,9 +89,28 @@ for($i=1;$i<13;$i++){
 			// 		//echo $ob->results[$i]->{'publisher/_text'};;
 			// 		curl_close($ch);
 		}
+		
+		foreach ($games as $game) {
+			$count=0;
+			$votes=0;
+			foreach ($game->vote_multiplayer as $vote) {
+				if($vote!="")
+				{
+					$count++;
+					$votes+=floatval($vote);
+				}
+			};
+			
+			if($count!=0)
+			{
+				$game->vote_multiplayer["all"]=$votes/$count;
+			}
+		}
+		
+		//break;
 }
-
-print_r ($pepiFree);
+}
+print_r ($games);
 
 //genre and publisher
 //https://api.import.io/store/data/13daeba6-655e-4af9-93b3-34e89dcf842a/_query?input/webpage/url=http%3A%2F%2Fwww.gamerevolution.com%2Fgame%2F0-day-attack-on-earth&_user=1612660c-6d35-44b0-bf1d-29a49efd169b&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef
