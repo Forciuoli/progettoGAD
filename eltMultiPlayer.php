@@ -1,15 +1,18 @@
 <?php
-include "classGame.php";
+//require "classGame.php";
+function getGameMultiplayer(){
 set_time_limit(1000000000000);
 $games=array();
-for($kk=1;$kk<4;$kk++){
+$controllo_pagine="";
+$months=["01"];//,"02","03","04","05","06","07","08","09","10","11","12"];
+for($kk=0;$kk<count($months);$kk++){
 for($i=1;$i<500;$i++){
 	if($i==1)
-		$ch = curl_init("https://api.import.io/store/data/647f1b46-43ec-430d-8c0f-b82a184138d0/_query?input/webpage/url=http%3A%2F%2Fmultiplayer.it%2Fgiochi%2F%3Fmonth%3D2015_0".$kk."&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
+		$ch = curl_init("https://api.import.io/store/data/647f1b46-43ec-430d-8c0f-b82a184138d0/_query?input/webpage/url=http%3A%2F%2Fmultiplayer.it%2Fgiochi%2F%3Fmonth%3D2015_".$months[$kk]."&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
 		else
 		{
-			$link="http://multiplayer.it/giochi/?pagina=".$i."&_=wjums&month=2015_10&querystring_key=pagina";
-			echo $link." ss ".$kk."</br>";
+			$link="http://multiplayer.it/giochi/?pagina=".$i."&_=wjums&month=2015_".$months[$kk]."&querystring_key=pagina";
+			//echo $link." ss ".$kk."</br>";
 			$ch = curl_init("https://api.import.io/store/data/647f1b46-43ec-430d-8c0f-b82a184138d0/_query?input/webpage/url=".urlencode($link)."&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
 		}
 
@@ -20,9 +23,16 @@ for($i=1;$i<500;$i++){
 		//echo $result;
 
 		$someObject = json_decode($result);
+		if($i==1)
+		{
+			$controllo_pagine=$someObject->results[0]->{'name/_text'};
+		}
 		
-		if($i>1 && $someObject->results[0]->{'name/_text'}==$games[0]->name)
+		if($i>1 && $someObject->results[0]->{'name/_text'}==$controllo_pagine)
+		{
 			break;
+		}
+			
 		
 		for ($j=0;$j < count($someObject->results);$j++)
 		{
@@ -110,7 +120,9 @@ for($i=1;$i<500;$i++){
 		//break;
 }
 }
-print_r ($games);
+return $games;
+}
+//print_r ($games);
 
 //genre and publisher
 //https://api.import.io/store/data/13daeba6-655e-4af9-93b3-34e89dcf842a/_query?input/webpage/url=http%3A%2F%2Fwww.gamerevolution.com%2Fgame%2F0-day-attack-on-earth&_user=1612660c-6d35-44b0-bf1d-29a49efd169b&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef

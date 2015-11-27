@@ -1,7 +1,8 @@
 <?php
-include 'classGame.php';
+//require "classGame.php";
+function getGameEveryEye(){
 set_time_limit(1000000000);
-$months = ["marzo"];//,"aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+$months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
  for ($j = 0; $j < count($months); $j++) 
  {
 	$ch = curl_init ("https://api.import.io/store/data/eb8721e7-d9de-43a4-af4c-a5c395e6d294/_query?input/webpage/url=http%3A%2F%2Fwww.everyeye.it%2Fgiochi%2F2015%2F".$months[$j]."%2F&_user=1612660c-6d35-44b0-bf1d-29a49efd169b&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
@@ -26,7 +27,7 @@ $months = ["marzo"];//,"aprile","maggio","giugno","luglio","agosto","settembre",
 		//echo $result2;
 		
 		$name = $someObject -> results[$i] -> {'name/_title'};
-		if(isset($someObject2 -> results[0]))  // se c'è la pagina del gioco
+		if(isset($someObject2 -> results[0]))  // se c'ï¿½ la pagina del gioco
 		{
 			$item = $someObject2 -> results[0];
 			
@@ -93,5 +94,6 @@ $months = ["marzo"];//,"aprile","maggio","giugno","luglio","agosto","settembre",
 		}
 	}
  }
- print_r($games);
- 
+ //print_r($games);
+ return $games;
+}
