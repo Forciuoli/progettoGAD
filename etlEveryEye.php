@@ -1,10 +1,10 @@
 <?php
+include 'classGame.php';
 set_time_limit(1000000000);
-$months = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-// for ($j = 0; $j < count($months); $j++) 
-// {
-	//echo $months[$j]."<br/>";
-	$ch = curl_init ("https://api.import.io/store/data/eb8721e7-d9de-43a4-af4c-a5c395e6d294/_query?input/webpage/url=http%3A%2F%2Fwww.everyeye.it%2Fgiochi%2F2015%2Fgennaio%2F&_user=1612660c-6d35-44b0-bf1d-29a49efd169b&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
+$months = ["marzo"];//,"aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+ for ($j = 0; $j < count($months); $j++) 
+ {
+	$ch = curl_init ("https://api.import.io/store/data/eb8721e7-d9de-43a4-af4c-a5c395e6d294/_query?input/webpage/url=http%3A%2F%2Fwww.everyeye.it%2Fgiochi%2F2015%2F".$months[$j]."%2F&_user=1612660c-6d35-44b0-bf1d-29a49efd169b&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
 	curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 	// Disable SSL verification
 	curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
@@ -12,10 +12,10 @@ $months = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","ago
 	curl_close ( $ch );
 	//echo $result;
 	$someObject = json_decode ( $result );
-	for($i = 1; $i < count ( $someObject->results ); $i ++)
+	$games = array();
+	for($i = 0; $i < count($someObject -> results); $i ++)
 	{
 		$link = $someObject -> results[$i] -> name;
-		$name = $someObject -> results[$i] -> {'name/_title'};
 		$ch = curl_init ("https://api.import.io/store/data/6f4ef18a-6b6c-4abf-9d1e-be9d0436bd9a/_query?input/webpage/url=".urlencode($link)."&_user=1612660c-6d35-44b0-bf1d-29a49efd169b&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 		// Disable SSL verification
@@ -24,22 +24,74 @@ $months = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","ago
 		curl_close ( $ch );
 		$someObject2 = json_decode ( $result2 );
 		//echo $result2;
-		$item = $someObject2 -> results[0];
-		if(isset($item -> {'vote/_text'}))
-		{
-			$vote = $item -> {'vote/_text'};
-			$dataPlatforms = split(':', $item -> dateplatforms);
-			foreach ($dataPlatforms as $data) {
-				$data[0];
-			}
-			//if($item -> dateplatforms != )
-		}
-			
 		
-		//break;
-	
-		//echo $result."<br/>";
-	
+		$name = $someObject -> results[$i] -> {'name/_title'};
+		if(isset($someObject2 -> results[0]))  // se c'è la pagina del gioco
+		{
+			$item = $someObject2 -> results[0];
+			
+			if(isset($item -> image))
+			{
+				$img_link = $item -> image;
+			}
+			
+			if(isset($item -> publisher))
+			{
+				$publisher = $item -> publisher;
+			}
+			
+			$game = new Game($name, $link, $publisher, $img_link);
+				
+			if(isset($item -> dateplatforms))
+			{
+				$date_platforms_nospace = str_replace(" : ", ":", $item -> dateplatforms);
+					
+				$date_platforms_nospace2 = str_replace("   ","&",$date_platforms_nospace);
+					
+				$dataPlatforms = split('&', $date_platforms_nospace2);
+					
+				foreach ($dataPlatforms as $data) {
+					$temp = split(':', $data);
+					$platform = $temp[0];
+					$date = $temp[1];
+					if($platform != "iPhone" && $platform != "iPad" && $platform != "Android Games" && $platform != "3DS" && $platform != "PSVita" && $platform != "Wii U")
+					{
+						array_push($game -> platform, $platform);
+						$game -> data[$platform] = $date;
+					}
+				}
+			}
+			
+			
+			
+			if(isset($item -> cooperative))
+			{
+				$game -> cooperative = $item -> cooperative;
+			}
+			
+			if(isset($item -> multiplayer_online))
+			{
+				$game -> multiplayer = $item -> multiplayer_online;
+			}
+			
+			if(isset($item -> hw_suggested))
+			{
+				$game ->hw_suggested = $item -> hw_suggested;
+			}
+			
+			if(isset($item -> minimum_requirements))
+			{
+				$game -> minimum_requirements = $item -> minimum_requirements;
+			}
+			
+			if(isset($item -> {'vote/_text'}))
+			{
+				$game -> vote_everyeye["all"] = $item -> {'vote/_text'};
+			}
+			
+			array_push($games, $game);
+		}
 	}
-// }
-
+ }
+ print_r($games);
+ 

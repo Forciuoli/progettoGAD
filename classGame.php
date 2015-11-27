@@ -12,7 +12,7 @@ class Game {
 	public $data = array("Ps3"=>"", "Xbox One"=>"", "Xbox 360"=>"","Pc"=>"","PS4"=>"");
 	public $multiplayer;
 	public $cooperative;
-	public $minum_requirements;
+	public $minimum_requirements;
 	public $hw_suggested;
 	public $publisher;
 	public $img_link;
