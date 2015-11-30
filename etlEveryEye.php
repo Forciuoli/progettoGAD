@@ -17,7 +17,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 	for($i = 0; $i < count($someObject -> results); $i ++)
 	{
 		$link = $someObject -> results[$i] -> name;
-		$ch = curl_init ("https://api.import.io/store/data/6f4ef18a-6b6c-4abf-9d1e-be9d0436bd9a/_query?input/webpage/url=".urlencode($link)."&_user=1612660c-6d35-44b0-bf1d-29a49efd169b&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
+		$ch = curl_init("https://api.import.io/store/connector/6f4ef18a-6b6c-4abf-9d1e-be9d0436bd9a/_query?input=webpage/url:".urlencode($link)."&&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 		// Disable SSL verification
 		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
@@ -27,7 +27,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 		//echo $result2;
 		
 		$name = $someObject -> results[$i] -> {'name/_title'};
-		if(isset($someObject2 -> results[0]))  // se c'� la pagina del gioco
+		if(isset($someObject2 -> results[0])) 
 		{
 			$item = $someObject2 -> results[0];
 			
@@ -93,6 +93,11 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$game -> vote_everyeye["all"] = $item -> {'vote/_text'};
 			}
 			
+			if(isset($item -> genreeveryeye))
+			{
+				array_push($game -> genre, $item -> genreeveryeye);
+			}
+			
 			if($can_push)
 			{
 				array_push($games, $game);
@@ -101,5 +106,5 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 	}
  }
  //print_r($games);
- return $games;
+ 	return $games;
 }
