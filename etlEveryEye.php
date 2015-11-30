@@ -50,7 +50,9 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$date_platforms_nospace2 = str_replace("   ","&",$date_platforms_nospace);
 					
 				$dataPlatforms = split('&', $date_platforms_nospace2);
-					
+				
+				$can_push = false;
+				
 				foreach ($dataPlatforms as $data) {
 					$temp = split(':', $data);
 					$platform = $temp[0];
@@ -59,6 +61,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 					{
 						array_push($game -> platform, $platform);
 						$game -> data[$platform] = $date;
+						$can_push = true;
 					}
 				}
 			}
@@ -90,7 +93,10 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$game -> vote_everyeye["all"] = $item -> {'vote/_text'};
 			}
 			
-			array_push($games, $game);
+			if($can_push)
+			{
+				array_push($games, $game);
+			}
 		}
 	}
  }
