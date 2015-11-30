@@ -40,7 +40,8 @@ foreach ($gameNotE as $gm) {
 	
 		$link=$gm->link;
 		$ch = curl_init("https://api.import.io/store/connector/ee6f2895-03d9-41e3-a099-97025ea0e7d7/_query?input=webpage/url:".urlencode($link)."&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
-			
+		// Disable SSL verification
+		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec($ch);
 		curl_close($ch);
@@ -48,7 +49,6 @@ foreach ($gameNotE as $gm) {
 		$someObject = json_decode($result);
 		$item = $someObject->results[0];
 		$platforms=split(",",$item->platform);
-		echo $item->platform."</br>";
 		foreach ($platforms as $platform) {
 			$platform=trim($platform);
 			if($platform=="xone" || $platform=="ps4" || $platform=="pc"
@@ -59,19 +59,19 @@ foreach ($gameNotE as $gm) {
 				$plat="-per-".$platform.".html";
 				$link=$link.$plat;
 				$ch = curl_init("https://api.import.io/store/connector/ee6f2895-03d9-41e3-a099-97025ea0e7d7/_query?input=webpage/url:".urlencode($link)."&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
-					
+				// Disable SSL verification
+				curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				$result = curl_exec($ch);
 				curl_close($ch);
-				echo $result;
 				$someObject = json_decode($result);
 			
 				$item = $someObject->results[0];
 				
 				if(isset($item->img))
 					$gm->img_link= $item->img;
-				
-				$gm->publisher= $item->publisher;
+				if(isset($item->publisher))
+					$gm->publisher= $item->publisher;
 				
 				
 				if($platform=="ps3")

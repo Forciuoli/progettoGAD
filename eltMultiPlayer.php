@@ -15,7 +15,8 @@ for($i=1;$i<500;$i++){
 			//echo $link." ss ".$kk."</br>";
 			$ch = curl_init("https://api.import.io/store/data/647f1b46-43ec-430d-8c0f-b82a184138d0/_query?input/webpage/url=".urlencode($link)."&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
 		}
-
+		// Disable SSL verification
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec($ch);
 		curl_close($ch);
