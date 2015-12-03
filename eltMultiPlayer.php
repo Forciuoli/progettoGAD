@@ -1,7 +1,7 @@
 <?php
 //require "classGame.php";
 function getGameMultiplayer(){
-set_time_limit(1000000000000);
+set_time_limit(0);
 $games=array();
 $controllo_pagine="";
 $months=["01"];//,"02","03","04","05","06","07","08","09","10","11","12"];

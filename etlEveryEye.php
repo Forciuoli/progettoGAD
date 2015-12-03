@@ -1,7 +1,7 @@
 <?php
 //require "classGame.php";
 function getGameEveryEye(){
-set_time_limit(1000000000);
+set_time_limit(0);
 $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
  for ($j = 0; $j < count($months); $j++) 
  {
