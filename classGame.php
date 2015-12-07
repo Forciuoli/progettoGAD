@@ -16,6 +16,8 @@ class Game {
 	public $hw_suggested;
 	public $publisher;
 	public $img_link;
+	public $review_everyeye;
+	public $review_multiplayer;
 	
 	// costruttore
 	public function __construct($name, $link, $publisher, $img_link) {
