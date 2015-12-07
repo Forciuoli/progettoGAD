@@ -1,6 +1,6 @@
 <?php
-require "classGame.php";
-//function getGameEveryEye(){
+//require "classGame.php";
+function getGameEveryEye(){
 set_time_limit(0);
 $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
  for ($j = 0; $j < count($months); $j++) 
@@ -103,7 +103,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 			if(isset($item -> vote))
 			{
 				$link_review = $item -> vote;
-				$ch = curl_init ("https://api.import.io/store/connector/a7f8384c-bab9-4cb7-ae28-66868f6fb34a/_query?input=webpage/url:".link_review."&&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
+				$ch = curl_init ("https://api.import.io/store/connector/a7f8384c-bab9-4cb7-ae28-66868f6fb34a/_query?input=webpage/url:".$link_review."&&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
 				curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 				// Disable SSL verification
 				curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
@@ -120,6 +120,6 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 		}
 	}
  }
- print_r($games);
-//  	return $games;
-// }
+//print_r($games);
+  	return $games;
+ }
