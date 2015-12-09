@@ -8,11 +8,13 @@ $gameMultiplayer=getGameMultiplayer();
 $gameEveryeye=getGameEveryEye();
 $gameMerged=array();
 $flag=false;
+
+//cerchiamo giochi che non sono in everyeye e se sono in entrambi aggiungiamo ai giochi definitivi mergiati
 foreach ($gameMultiplayer as $gameM) {
 	$flag=false;
 	foreach ($gameEveryeye as $gameE) {
 		
-		if(levenshtein(($gameM->name),strtolower($gameE->name))<3)
+		if(levenshtein(strtolower($gameM->name),strtolower($gameE->name))<3)
 		{
 			$game=new Game($gameM->name,"",$gameE->publisher,$gameE->img_link);
 			$game->cooperative=$gameE->cooperative;
@@ -36,6 +38,7 @@ foreach ($gameMultiplayer as $gameM) {
 	}
 }
 
+//per tutti i giochi che non ci sono in everyeye li prendiamo completamente da multiplayer con il link direttamente
 foreach ($gameNotE as $gm) {
 
 	$link=$gm->link;
@@ -95,7 +98,7 @@ foreach ($gameNotE as $gm) {
 		array_push($gameMerged,$gm);
 }
 
-
+//per tutti i giochi che non sono in multiplayer catalogati per mese (consideriamo tutti i giochi che sono in everyeye ma non in multiplayer)
 $flag=false;
 foreach ($gameEveryeye as $gameE) {
 	$flag=false;
@@ -110,9 +113,8 @@ foreach ($gameEveryeye as $gameE) {
 
 	if(!$flag)
 	{
-		
+		//api ricerca su multiplayer
 		$ch = curl_init("https://api.import.io/store/connector/b39989fa-8435-4d9a-994f-acc5e5691143/_query?input=webpage/url:http%3A%2F%2Fmultiplayer.it%2Fricerca%2F%3Fq%3Dgioco%2520".urlencode(strtolower($gameE->name))."&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
-		// Disable SSL verification
 		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		set_time_limit(0);
@@ -120,7 +122,6 @@ foreach ($gameEveryeye as $gameE) {
 		curl_close($ch);
 		$someObject = json_decode($result);
 		$link=levenshteinMatch($serched,$someObject);
-		//aggiungere genere da gameE
 		if($link="")
 		{
 			array_push($gameMerged,$gameE);
@@ -155,14 +156,15 @@ foreach ($gameEveryeye as $gameE) {
 				$someObject = json_decode($result);
 					
 				$item = $someObject->results[0];
-		
+				
+				//genere da multiplayer
 				$split_genre=split(",",$item->genre);
 				$gameE->genre=array();
 				foreach ($split_genre as $genre) {
 					array_push($gameE->genre,$genre);
 				}
 				
-			
+				//voti per goni piattaforma da multiplayer
 				if($platform=="ps3")
 					$gameE->vote_multiplayer["PlayStation 3"]=$item->{'vote'};
 				else if($platform=="ps4")
@@ -174,24 +176,25 @@ foreach ($gameEveryeye as $gameE) {
 				else if($platform=="xone")
 					$gameE->vote_multiplayer["Xbox One"]=$item->{'vote'};
 												
-				$count=0;
-				$votes=0;
-				foreach ($gameE->vote_multiplayer as $vote) {
-					if($vote!="")
-					{
-						$count++;
-						$votes+=floatval($vote);
-					}
-				};
-					
-				if($count!=0)
-				{
-					$gameE->vote_multiplayer["all"]=$votes/$count;
-				}				
+						
 												
 			}
 		}
-		
+		//media voti
+		$count=0;
+		$votes=0;
+		foreach ($gameE->vote_multiplayer as $vote) {
+			if($vote!="")
+			{
+				$count++;
+				$votes+=floatval($vote);
+			}
+		};
+			
+		if($count!=0)
+		{
+			$gameE->vote_multiplayer["all"]=$votes/$count;
+		}
 		array_push($gameMerged,$gameE);
 	}
 }
