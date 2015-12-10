@@ -30,7 +30,7 @@ foreach ($gameMerged as $game) {
 			."'".$game->img_link."',"
 			."'".getStringFromArray($game->genre)."',"
 			."'".getStringFromArray($game->platform)."',"
-			.$game->vote_multiplayer["all"].","
+			.$game->vote_multiplayer["all"]."," 
 		    .$game->vote_everyeye["all"].","
 		    .$game->vote_multiplayer["PlayStation 4"].","
 		    .$game->vote_multiplayer["PlayStation 3"].","
