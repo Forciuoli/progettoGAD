@@ -71,6 +71,13 @@ foreach ($gameNotE as $gm) {
 				curl_close($ch);
 				$someObject = json_decode($result);
 			
+				
+				
+				if(!isset($someObject -> results[0]))
+				{
+					continue;
+				}
+				
 				$item = $someObject->results[0];
 				
 				if(isset($item->img))
@@ -172,31 +179,32 @@ foreach ($gameEveryeye as $gameE) {
 				$result = curl_exec($ch);
 				curl_close($ch);
 				$someObject = json_decode($result);
+				if(isset($someObject->results[0]))
+				{
+					$item = $someObject->results[0];
+			        
+					$split_genre=split(",",$item->genre);
+					$gameE->genre=array();
+					foreach ($split_genre as $genre) {
+						array_push($gameE->genre,$genre);
+					}
 					
-				$item = $someObject->results[0];
-		
-				$split_genre=split(",",$item->genre);
-				$gameE->genre=array();
-				foreach ($split_genre as $genre) {
-					array_push($gameE->genre,$genre);
-				}
-				
-			    if(isset($item->{'vote'}))
-			    {
-			    	if($platform=="ps3")
-			    		$gameE->vote_multiplayer["PlayStation 3"]=$item->{'vote'};
-			    	else if($platform=="ps4")
-			    		$gameE->vote_multiplayer["PlayStation 4"]=$item->{'vote'};
-			    	else if($platform=="pc")
-			    		$gameE->vote_multiplayer["PC Windows"]=$item->{'vote'};
-			    	else if($platform=="x360")
-			    		$gameE->vote_multiplayer["Xbox 360"]=$item->{'vote'};
-			    	else if($platform=="xone")
-			    		$gameE->vote_multiplayer["Xbox One"]=$item->{'vote'};
-			    }
-				
-												
+				    if(isset($item->{'vote'}))
+				    {
+				    	if($platform=="ps3")
+				    		$gameE->vote_multiplayer["PlayStation 3"]=$item->{'vote'};
+				    	else if($platform=="ps4")
+				    		$gameE->vote_multiplayer["PlayStation 4"]=$item->{'vote'};
+				    	else if($platform=="pc")
+				    		$gameE->vote_multiplayer["PC Windows"]=$item->{'vote'};
+				    	else if($platform=="x360")
+				    		$gameE->vote_multiplayer["Xbox 360"]=$item->{'vote'};
+				    	else if($platform=="xone")
+				    		$gameE->vote_multiplayer["Xbox One"]=$item->{'vote'};
+				    }
 					
+				}							
+						
 												
 			}
 		}

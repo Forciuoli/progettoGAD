@@ -16,7 +16,13 @@ echo "Connected successfully<br/>";
 
 $gameMerged=getGameMerged();
 foreach ($gameMerged as $game) {
-
+	$game->review_everyeye = str_replace("'", "''", $game->review_everyeye);
+	$game->review_multiplayer = str_replace("'", "''", $game->review_multiplayer);
+	$game->name = str_replace("'", "''", $game->name);
+	$game->multiplayer = str_replace("'", "''", $game->multiplayer);
+	$game->minimum_requirements = str_replace("'", "''", $game->minimum_requirements);
+	$game->publisher = str_replace("'", "''", $game->publisher);
+	$game->name = str_replace("'", "''", $game->name);
 	$sql = "INSERT INTO games(Name, Link, Info_multiplayer, Info_cooperative, Minimum_requirements, Hw_suggested, Publisher, Img_link, Genres, "
 	."Platforms, Vote_multiplayer, Vote_everyeye, Vote_ps4_multiplayer, Vote_ps3_multiplayer, Vote_pc_multiplayer, Vote_x360_multiplayer, "
 	."Vote_xone_multplayer, Data_ps4, Data_ps3, Data_pc, Data_x360, Data_xone, review_everyeye, review_multiplayer) "
@@ -67,3 +73,4 @@ function getStringFromArray($arrToSplit)
 
 		
 $conn->close();
+echo "finish";
