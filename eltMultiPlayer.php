@@ -54,6 +54,13 @@ for($i=1;$i<500;$i++){
 			{
 				$name=$someObject->results[$j]->{'name/_text'};
 				
+				if(strpos($name,' II ') !== false || strpos($name,' III ') !== false || strpos($name,' IV ') !== false)
+			   	{
+			   		$name = str_replace('III', '3', $name);
+			   		$name = str_replace('II', '2', $name);
+			   		$name = str_replace('IV', '4', $name);
+			   	}
+				
 				$link=$someObject->results[$j]->{'name'};
 				if(isset($someObject->results[$j]->{'vote'}))
 				$flag=false;
