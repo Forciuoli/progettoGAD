@@ -5,8 +5,8 @@ class Game {
 	// variabili
 	public $name;
 	public $link;
-	public $vote_multiplayer = array("all"=>"","PlayStation 4"=>"", "Xbox One"=>"", "Xbox 360"=>"","PC Windows"=>"","PlayStation 3"=>"");
-	public $vote_everyeye = array("all"=>"");
+	public $vote_multiplayer = array("all"=>"0","PlayStation 4"=>"0", "Xbox One"=>"0", "Xbox 360"=>"0","PC Windows"=>"0","PlayStation 3"=>"0");
+	public $vote_everyeye = array("all"=>"0");
 	public $genre = array();
 	public $platform = array();
 	public $data = array("Ps3"=>"", "Xbox One"=>"", "Xbox 360"=>"","Pc"=>"","PS4"=>"");

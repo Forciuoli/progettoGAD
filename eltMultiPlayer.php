@@ -101,26 +101,66 @@ for($i=1;$i<500;$i++){
 			// 		curl_close($ch);
 		}
 		
-		foreach ($games as $game) {
-			$count=0;
-			$votes=0;
-			foreach ($game->vote_multiplayer as $vote) {
-				if($vote!="")
-				{
-					$count++;
-					$votes+=floatval($vote);
-				}
-			};
-			
-			if($count!=0)
-			{
-				$game->vote_multiplayer["all"]=$votes/$count;
-			}
-		}
+		
 		
 		//break;
 }
 }
+
+foreach ($games as $game) {
+	$count=0;
+	$votes=0;
+	
+	// https://api.import.io/store/connector/ed5c46cf-298d-4fc0-a8ce-d9bcc9387d75/_query?input=webpage/url:http%3A%2F%2Fmultiplayer.it%2Frecensioni%2F158555-call-of-duty-black-ops-iii-mental-ops.html%3Fpiattaforma%3Dps4&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326
+	$ch = curl_init("https://api.import.io/store/connector/ee6f2895-03d9-41e3-a099-97025ea0e7d7/_query?input=webpage/url:".urlencode($game->link)."&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
+	// Disable SSL verification
+	curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false );
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	set_time_limit(0);
+	$result = curl_exec($ch);
+	
+	
+	
+	curl_close($ch);
+	
+	$someObject = json_decode($result);
+	$item = $someObject->results[0];
+	if(isset($item -> review))
+	{
+		$link_review = $item -> review;
+		
+		//echo $link_review."</br>";
+		$ch = curl_init ("https://api.import.io/store/connector/0453b716-4774-4802-913e-e64060955f17/_query?input=webpage/url:".$link_review."&&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
+		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+		// Disable SSL verification https://api.import.io/store/connector/0453b716-4774-4802-913e-e64060955f17/_query?input=webpage/url:http%3A%2F%2Fmultiplayer.it%2Frecensioni%2F158555-call-of-duty-black-ops-iii-mental-ops.html%3Fpiattaforma%3Dps4&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
+		$result3 = curl_exec ( $ch );
+	
+	
+	
+		curl_close ( $ch );
+		//echo $result3;
+		$someObject3 = json_decode ( $result3 );
+		if(isset($someObject3 -> results[0] -> review))
+		{
+			$game -> review_multiplayer = $someObject3 -> results[0] -> review;
+		}
+	}
+	
+	foreach ($game->vote_multiplayer as $vote) {
+		if($vote!="0")
+		{
+			$count++;
+			$votes+=floatval($vote);
+		}
+	};
+		
+	if($count!=0)
+	{
+		$game->vote_multiplayer["all"]=$votes/$count;
+	}
+}
+
 return $games;
 }
 //print_r ($games);
