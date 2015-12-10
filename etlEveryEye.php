@@ -110,7 +110,10 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$result3 = curl_exec ( $ch );
 				curl_close ( $ch );
 				$someObject3 = json_decode ( $result3 );
+				if(isset($someObject3 -> results[0] -> review))
+				{
 				$game -> review_everyeye = $someObject3 -> results[0] -> review;
+				}
 			}
 			
 			if($can_push)
