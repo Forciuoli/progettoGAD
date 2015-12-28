@@ -25,6 +25,8 @@ foreach ($gameMultiplayer as $gameM) {
 			$game->platform=$gameE->platform;
 			$game->vote_multiplayer=$gameM->vote_multiplayer;
 			$game->vote_everyeye=$gameE->vote_everyeye;
+			$game->review_everyeye=$gameE->review_everyeye;
+			$game->review_multiplayer=$gameM->review_multiplayer;
 			array_push($gameMerged,$game);
 			$flag=true;
 			break;
@@ -209,7 +211,6 @@ foreach ($gameEveryeye as $gameE) {
 			}
 		}
 		
-		$item = $someObject->results[0];
 		if(isset($item -> review))
 		{
 			$link_review = $item -> review;
@@ -281,51 +282,6 @@ function levenshteinMatch($searched,$someObject)
 	
 }
 
-function numeri_romani($cifra)
-{
-	
-	# ricaviamo il numero intero dal parametro passato alla funzione
-	$numero = intval($cifra);
-
-	# creo una variabile vuota che utilizzerò per l'output
-	$output = '';
-
-	# creaiamo un array di numeri romani
-	# già ordinati progressivamente da più grande al più piccolo
-	$numeri_romani = array(
-	'M' => 1000,
-	'CM' => 900,
-	'D' => 500,
-	'CD' => 400,
-	'C' => 100,
-	'XC' => 90,
-	'L' => 50,
-	'XL' => 40,
-	'X' => 10,
-	'IX' => 9,
-	'V' => 5,
-	'IV' => 4,
-	'I' => 1
-	);
-
-	# cicliamo l'array
-	foreach ($numeri_romani as $val => $v)
-	{
-		# dividiamo il parametro della funzione per i valori contenuti
-		# nell'array e ricaviamo dal risultato il numero intero
-		$valore = intval($numero / $v);
-
-		# ripetiamo la stringa ottenuta per un numero di volte pari al
-		# numero intero ottenuto in precedenza
-		$output .= str_repeat($val, $valore);
-
-		# calcoliamo il resto della divisione
-		$numero = $numero % $v;
-	}
-
-	# valore di ritorno della funzione
-	return $output;
-}
 
 
 

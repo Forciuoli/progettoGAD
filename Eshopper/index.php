@@ -1,9 +1,11 @@
-    <?php
+<?php
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "GAD";
-
+$page=1;
+if(isset($_GET["page"]))
+       $page=$_GET["page"];
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -11,7 +13,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM games";
+$sql = "SELECT * FROM games LIMIT 12 OFFSET ".($page-1)*12;
 $result = $conn->query($sql);
 
 $conn -> close();
@@ -27,12 +29,15 @@ $conn -> close();
     <meta name="author" content="">
     <title>Home | E-Game</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cocc.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/price-range.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+	<script src="js/index.js"></script>
+	<script src="js/jquery.js"></script>
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -121,7 +126,7 @@ $conn -> close();
 	
 	
 	
-	<section>
+	<section id="mainSection">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
@@ -256,13 +261,13 @@ $conn -> close();
 								// output data of each row
 								while($row = $result->fetch_assoc()) {
 									echo '<div class="col-sm-3">
-									<div class="product-image-wrapper">
+									<div class="product-image-wrapper" style="width:184px;height:367px">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="'.$row["Img_link"].'" alt="" />
+												<img src="'.($row["Img_link"]==""?"/gadProject/Eshopper/images/product-details/imgNO.jpg":$row["Img_link"]).'" alt="" style="width:182px;height:256px"/>
 												<h2></h2>
 												<p>'.$row["Name"].'</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Dettagli</a>
+												<a onclick="getDetailGame('.$row["Id"].');return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Dettagli</a>
 											</div>
 											
 										</div>
@@ -273,24 +278,47 @@ $conn -> close();
 								echo "0 results";
 							}
 							?>
+							
 								
 								
 					</div><!--/category-tab-->
-					
+			
 					
 					
 				</div>
+						
 			</div>
+			<ul class="pagination">
+			              <?php
+			                $page=1;
+			                $pag=1;
+							if(isset($_GET["shift"]))
+						       $page=$_GET["shift"];
+						    if(isset($_GET["page"]))
+						       $pag=$_GET["page"];
+						    if($page>5)
+						    echo '<li><a href="index.php?shift='.($page-5).'&page='.($page-5).'">&laquo;</a></li>';
+						    for ($i = 0; $i < 5; $i++) {
+						    	if($pag==$page+$i)
+						    		echo '<li class="active"><a  href="index.php?page='.($page+$i).'&shift='.($page).'">'.($page+$i).'</a></li>';
+						    	else
+						    		echo '<li><a href="index.php?page='.($page+$i).'&shift='.($page).'">'.($page+$i).'</a></li>';
+						    }	
+						    echo '<li><a href="index.php?shift='.($page+5).'&page='.($page+5).'">&raquo;</a></li>';
+							?>
+						</ul>
 		</div>
 	</section>
 	
+	<div id="detailGame">
+	</div>
 	<footer id="footer"><!--Footer-->
 		
 		
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright © 2016 E-GAME Inc. All rights reserved.</p>
+					<p class="pull-left">Copyright ï¿½ 2016 E-GAME Inc. All rights reserved.</p>
 					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">ancora NOI</a></span></p>
 				</div>
 			</div>

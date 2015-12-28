@@ -18,6 +18,10 @@ class Game {
 	public $img_link;
 	public $review_everyeye;
 	public $review_multiplayer;
+	public $price_amazon;
+	public $price_ebay;
+	public $link_amazon;
+	public $link_ebay;
 	
 	// costruttore
 	public function __construct($name, $link, $publisher, $img_link) {

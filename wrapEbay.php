@@ -1,7 +1,7 @@
 <?php
 function getEbayGames($name)
 {
-$link = "http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.1.0&SECURITY-APPNAME=ac8e33ea-3922-4089-a6bc-e528b903609f&GLOBAL-ID=EBAY-IT&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&categoryId=1249&itemFilter(0).name=Condition&itemFilter(0).value(0)=New&keywords=".urlencode($name);
+$link = "http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.1.0&SECURITY-APPNAME=ac8e33ea-3922-4089-a6bc-e528b903609f&GLOBAL-ID=EBAY-IT&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&categoryId=1249&itemFilter(0).name=Condition&itemFilter(0).value(0)=New&itemFilter(1).name=ListingType&itemFilter(1).value(0)=FixedPrice&keywords=".urlencode($name);
 $ch = curl_init ($link);
 curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 // Disable SSL verification
@@ -10,6 +10,10 @@ $result = curl_exec ( $ch );
 curl_close ( $ch );
 $games = array();
 $someObject = json_decode ( $result );
+if(!isset($someObject -> findItemsAdvancedResponse[0] -> searchResult[0] -> item))
+{
+	return $games;
+}
 for ($i = 0; $i < count($someObject -> findItemsAdvancedResponse[0] -> searchResult[0] -> item); $i++) {
 	
 	$items = $someObject -> findItemsAdvancedResponse[0] -> searchResult[0] -> item[$i];
@@ -39,8 +43,13 @@ for ($i = 0; $i < count($someObject -> findItemsAdvancedResponse[0] -> searchRes
 	$price = $items -> sellingStatus[0] -> convertedCurrentPrice[0] -> {'__value__'};
 	$link = $items -> viewItemURL[0];
 	
+	
 	$game = new Game($title, $link, $platform, $price);
-	array_push($games, $game);
+	if($platform!="" && $items->country[0]=="IT" && stripos($title, "poster") === false
+			&& stripos($title, "code") === false && stripos($title, "pass") === false
+			&& stripos($title, "code-pass") === false && stripos($title, "pass-code") === false
+			&& stripos($title, "key") === false && stripos($title, "chiave") === false)
+		array_push($games, $game);
 }
 	return $games;
 }

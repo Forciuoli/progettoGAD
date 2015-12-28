@@ -56,7 +56,7 @@ for($i=1;$i<500;$i++){
 			{
 				$name=$someObject->results[$j]->{'name/_text'};
 				
-				if(strpos($name,' II ') !== false || strpos($name,' III ') !== false || strpos($name,' IV ') !== false || strpos($name,' IV:') !== false)
+				if(strpos($name,' II ') !== false || strpos($name,' III ') !== false || strpos($name,' III') !== false || strpos($name,' II') !== false || strpos($name,' IV ') !== false || strpos($name,' IV:') !== false)
 			   	{
 			   		$name = str_replace('III', '3', $name);
 			   		$name = str_replace('II', '2', $name);
