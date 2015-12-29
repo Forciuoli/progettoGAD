@@ -1,15 +1,19 @@
 var global_genre="all";
 var global_platform="all";
 var global_page;
+var global_idGame;
 
 function getDetailGame(idGame)
 {
+	global_idGame = idGame;
 	var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+	    
+	     document.getElementById("detailGame").style.display = "";
 	     document.getElementById("detailGame").innerHTML = xhttp.responseText;
 	     document.getElementById("mainSection").style.display = "none";
-	     //cocc();
+	
 	     var i = 0 , prec;
 	     var j = 0 , prec1;
 	     var degs = $("#prec").attr("class").split(' ')[1];
@@ -82,8 +86,20 @@ function getDetailGame(idGame)
 	      
 	  }
 	  
+	  
+	  //chiamata ajax per mediator
+	  var xhttp2 = new XMLHttpRequest();
+	  xhttp2.onreadystatechange = function() {
+	    if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+	     document.getElementById("comparaPrezzi").innerHTML = xhttp2.responseText;
+	    		}
+	  		};
+	  		
+	  xhttp2.open("GET", "getPrezzi.php?id="+global_idGame, true);
+	  xhttp2.send();
 	    }
 	  };
+	  
 	  xhttp.open("GET", "getDetail.php?id="+idGame, true);
 	  xhttp.send();
 }
@@ -105,4 +121,10 @@ function getFilteredGames(genre,platform,page)
 	  xhttp.send();
 }
 
+function hideDetail()
+{
+    document.getElementById("mainSection").style.display = "";
+    document.getElementById("detailGame").style.display = "none";
 
+
+}
