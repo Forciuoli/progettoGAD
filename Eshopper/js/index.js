@@ -1,3 +1,6 @@
+var global_genre="all";
+var global_platform="all";
+var global_page;
 
 function getDetailGame(idGame)
 {
@@ -85,5 +88,21 @@ function getDetailGame(idGame)
 	  xhttp.send();
 }
 
+function getFilteredGames(genre,platform,page)
+{
+	if(genre!="")
+		global_genre=genre;
+	if(platform!="")
+		global_platform=platform;
+	var xhttp = new XMLHttpRequest();
+	  
+	  xhttp.onreadystatechange = function() {
+		    if (xhttp.readyState == 4 && xhttp.status == 200) {
+		     document.getElementById("elencoGiochi").innerHTML = xhttp.responseText;
+		    }
+	  }
+	  xhttp.open("GET", "getFilteredGames.php?genre="+global_genre+"&platform="+global_platform, true);
+	  xhttp.send();
+}
 
 

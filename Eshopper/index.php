@@ -4,6 +4,8 @@ $username = "root";
 $password = "";
 $dbname = "GAD";
 $page=1;
+$_GET["genre"]="all";
+$_GET["platform"]="all";
 if(isset($_GET["page"]))
        $page=$_GET["page"];
 // Create connection
@@ -14,6 +16,7 @@ if ($conn->connect_error) {
 } 
 
 $sql = "SELECT * FROM games LIMIT 12 OFFSET ".($page-1)*12;
+
 $result = $conn->query($sql);
 
 $conn -> close();
@@ -135,82 +138,82 @@ $conn -> close();
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 						<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Tutti</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('all','','');return false;">Tutti</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Azione</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Action','','');return false;">Azione</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Avventura</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Adventure','','');return false;">Avventura</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Casual</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Casual','','');return false;">Casual</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Gestionale(manageriale)</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Gestionale','','');return false;">Gestionale(manageriale)</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Gioco di guida</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Guida','','');return false;">Gioco di guida</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Gioco di ruolo(giapponese)</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Ruolo','','');return false;">Gioco di ruolo(giapponese)</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Online</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Online','','');return false;">Online</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Picchiaduro</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Picchiaduro','','');return false;">Picchiaduro</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Platform</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Platform','','');return false;">Platform</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Puzzle</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Puzzle','','');return false;">Puzzle</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Simulazione</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Simulazione','','');return false;">Simulazione</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Sparatutto</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Sparatutto','','');return false;">Sparatutto</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Sportivo</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Sportivo','','');return false;">Sportivo</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Strategico</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Strategico','','');return false;">Strategico</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Survival</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Survival','','');return false;">Survival</a></h4>
 								</div>
 							</div>
 						</div><!--/category-products-->
@@ -219,11 +222,12 @@ $conn -> close();
 							<h2>Piattaforme</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right"></span>Pc</a></li>
-									<li><a href="#"> <span class="pull-right"></span>Ps4</a></li>
-									<li><a href="#"> <span class="pull-right"></span>Ps3</a></li>
-									<li><a href="#"> <span class="pull-right"></span>Xbox 360</a></li>
-									<li><a href="#"> <span class="pull-right"></span>Xbox One</a></li>
+									<li><a href="" onclick="getFilteredGames('','all','');return false;"> <span class="pull-right"></span>Tutte</a></li>
+									<li><a href="" onclick="getFilteredGames('','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
+									<li><a href="" onclick="getFilteredGames('','PS4','');return false;"> <span class="pull-right"></span>Ps4</a></li>
+									<li><a href="" onclick="getFilteredGames('','PS3','');return false;"> <span class="pull-right"></span>Ps3</a></li>
+									<li><a href="" onclick="getFilteredGames('','XbOX 360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>
+									<li><a href="" onclick="getFilteredGames('','Xbox one','');return false;"> <span class="pull-right"></span>Xbox One</a></li>
 								</ul>
 							</div>
 						</div><!--/brands_products-->
@@ -247,15 +251,16 @@ $conn -> close();
 					<div class="category-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
-								<li class="active"><a href="#tshirt" data-toggle="tab">Pc</a></li>
-								<li><a href="#blazers" data-toggle="tab">Ps4</a></li>
-								<li><a href="#sunglass" data-toggle="tab">Ps3</a></li>
-								<li><a href="#kids" data-toggle="tab">Xbox 360</a></li>
-								<li><a href="#poloshirt" data-toggle="tab">Xbox One</a></li>
+								<li><a href="" onclick="getFilteredGames('','all','');return false;"> <span class="pull-right"></span>Tutte</a></li>
+									<li class="active"><a href="" onclick="getFilteredGames('','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
+									<li><a href="" onclick="getFilteredGames('','PS4','');return false;"> <span class="pull-right"></span>Ps4</a></li>
+									<li><a href="" onclick="getFilteredGames('','PS3','');return false;"> <span class="pull-right"></span>Ps3</a></li>
+									<li><a href="" onclick="getFilteredGames('','XbOX 360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>
+									<li><a href="" onclick="getFilteredGames('','Xbox one','');return false;"> <span class="pull-right"></span>Xbox One</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
-							<div class="tab-pane fade active in" id="tshirt" >
+							<div class="tab-pane fade active in" id="elencoGiochi" >
 							<?php 
 							if ($result->num_rows > 0) {
 								// output data of each row

@@ -88,7 +88,7 @@ echo '<div class="product-details"><!--product-details-->
 								<li><a href="#details" data-toggle="tab">Dettagli</a></li>
 								<li><a href="#reviewMultiplayer" data-toggle="tab">Recensione MultiPlayer</a></li>
 								<li><a href="#reviewEveryEye" data-toggle="tab">Recensione EveryEye</a></li>
-								<li class="active"><a href="#reviews" data-toggle="tab">Compara Prezzi</a></li>
+								<li class="active"><a href="#comparaPrezzi" data-toggle="tab">Compara Prezzi</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
@@ -146,8 +146,10 @@ echo '<div class="product-details"><!--product-details-->
 							<div class="tab-pane fade" id="reviewMultiplayer" >
 								'.$row['review_multiplayer'].'
 							</div>
-							
-							<div class="tab-pane fade CSSTableGenerator" id="reviewEveryEye" >
+							<div class="tab-pane fade" id="reviewEveryEye" >
+								'.$row['review_everyeye'].'
+							</div>
+							<div class="tab-pane fade CSSTableGenerator" id="comparaPrezzi" >
 									
                 <table >
                     '.$table.'
