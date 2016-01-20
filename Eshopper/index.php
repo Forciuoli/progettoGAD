@@ -119,7 +119,9 @@ $conn -> close();
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+						<form onsubmit="getGame(this.inputSearch.value);return false;">
+							<input name="inputSearch" type="text" placeholder="Search"/>
+							</form>
 						</div>
 					</div>
 				</div>
