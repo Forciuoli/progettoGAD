@@ -15,7 +15,7 @@ if(isset($_GET["name"]))
 
 	//pulizia nome
 	
-	$sql = "SELECT * FROM games where Name ='$name'";
+	$sql = "SELECT * FROM games where Name LIKE '%".$name."%'";
 	$result = $conn->query($sql);
 	$conn -> close();
 	if ($result->num_rows > 0) {
@@ -23,5 +23,9 @@ if(isset($_GET["name"]))
 			$idGame = $row['Id'];
 			getDetailByIdGame($idGame);
 		}
+	}
+	else
+	{
+		
 	}
 	

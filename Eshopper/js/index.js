@@ -231,7 +231,6 @@ function getGame(nameGame)
 	    		}
 	  		};
 	  var idGame = document.getElementById("idGame").innerHTML;
-	  alert(idGame);
 	  xhttp2.open("GET", "getPrezzi.php?id="+idGame, true);
 	  xhttp2.send();
 	    }
