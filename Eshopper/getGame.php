@@ -1,5 +1,6 @@
 <?php
 include "getDetailByIdGame.php";
+include "getResearchEveryEye.php";
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -26,6 +27,8 @@ if(isset($_GET["name"]))
 	}
 	else
 	{
+		$game = getResearchEveryEye($name);
+		printr($game);
 		
 	}
 	

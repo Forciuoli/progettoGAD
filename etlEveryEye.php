@@ -17,7 +17,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 	for($i = 0; $i < count($someObject -> results); $i ++)
 	{
 		$link = $someObject -> results[$i] -> name;
-		$ch = curl_init("https://api.import.io/store/connector/6f4ef18a-6b6c-4abf-9d1e-be9d0436bd9a/_query?input=webpage/url:".urlencode($link)."&&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
+		$ch = curl_init("https://api.import.io/store/connector/5ba164ec-2544-4eb9-b41b-dc3053f97300/_query?input=webpage/url:".urlencode($link)."&&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 		// Disable SSL verification
 		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
@@ -43,27 +43,34 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 			
 			$game = new Game($name, $link, $publisher, $img_link);
 				
-			if(isset($item -> dateplatforms))
+			if(isset($item -> platforms))
 			{
-				$date_platforms_nospace = str_replace(" : ", ":", $item -> dateplatforms);
+				$platforms = $item -> platforms;
 					
-				$date_platforms_nospace2 = str_replace("   ","&",$date_platforms_nospace);
-					
-				$dataPlatforms = split('&', $date_platforms_nospace2);
-				
 				$can_push = false;
 				
-				foreach ($dataPlatforms as $data) {
-					$temp = split(':', $data);
-					$platform = $temp[0];
-					$date = $temp[1];
-					if($platform != "iPhone" && $platform != "iPad" && $platform != "Android Games" && $platform != "3DS" && $platform != "PSVita" && $platform != "Wii U")
-					{
-						array_push($game -> platform, $platform);
-						$game -> data[$platform] = $date;
-						$can_push = true;
+				$temp = split(' ', $platforms);
+					for ($i = 0; $i < count($temp); $i++) {
+						$platform = $temp[$i];
+						if($platform != "iPhone" && $platform != "iPad" && $platform != "Android Games" && $platform != "3DS" && $platform != "PSVita" && $platform != "Wii U")
+						{
+							array_push($game -> platform, $platform);
+							$game -> data[$platform] = $date;
+							$can_push = true;
+						}
 					}
-				}
+					
+				
+			}
+			
+			if(isset($item -> dateplatforms))
+			{
+				$date_platforms = $item -> dateplatforms;
+				$months = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
+				$datesplit = split(' ',$date_platforms);
+				$datastring=$datesplit[0]."/".$months[$datesplit[1]]."/".$datesplit[2];
+				
+				$game -> data = $datastring;
 			}
 			
 			
@@ -78,31 +85,21 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$game -> multiplayer = $item -> multiplayer_online;
 			}
 			
-			if(isset($item -> hw_suggested))
+			if(isset($item -> {'vote'}))
 			{
-				$game ->hw_suggested = $item -> hw_suggested;
-			}
-			
-			if(isset($item -> minimum_requirements))
-			{
-				$game -> minimum_requirements = $item -> minimum_requirements;
-			}
-			
-			if(isset($item -> {'vote/_text'}))
-			{
-				$game -> vote_everyeye["all"] = $item -> {'vote/_text'};
+				$game -> vote_everyeye["all"] = split(' ', $item -> {'vote'})[0];;
 			}
 			
 			//verrà preso in seguito solo nel caso non ci sia il gioco su multiplayer
-			if(isset($item -> genreeveryeye))
+			if(isset($item -> genre_everyeye))
 			{
-				array_push($game -> genre, $item -> genreeveryeye);
+				array_push($game -> genre, $item -> genre_everyeye);
 			}
 			
 			//se c'è il link della recensione
-			if(isset($item -> vote))
+			if(isset($item -> link_review))
 			{
-				$link_review = $item -> vote;
+				$link_review = $item -> link_review;
 				$ch = curl_init ("https://api.import.io/store/connector/a7f8384c-bab9-4cb7-ae28-66868f6fb34a/_query?input=webpage/url:".$link_review."&&_apikey=1612660c6d3544b0bf1d29a49efd169bf68f20bae1b1e7fe100d0c943b328a0b9266dedd030dd5c9f87c9863938967c52c8d7be1b9d2674cfd6318083e289aa38f29f192f864849a7d6e7341951a47ef");
 				curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 				// Disable SSL verification
