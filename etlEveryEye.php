@@ -55,7 +55,6 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 						if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROID GAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WII U")
 						{
 							array_push($game -> platform, $platform);
-							$game -> data[$platform] = $date;
 							$can_push = true;
 						}
 					}
@@ -68,7 +67,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$date_platforms = $item -> dateplatforms;
 				$months = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
 				$datesplit = split(' ',$date_platforms);
-				$datastring=$datesplit[0]."/".$months[$datesplit[1]]."/".$datesplit[2];
+				$datastring=$datesplit[0]."/".$months[strtolower($datesplit[1])]."/".$datesplit[2];
 				
 				$game -> data = $datastring;
 			}

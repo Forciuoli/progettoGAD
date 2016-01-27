@@ -25,7 +25,7 @@ foreach ($gameMerged as $game) {
 	$game->name = str_replace("'", "''", $game->name);
 	$sql = "INSERT INTO games(Name, Link, Info_multiplayer, Info_cooperative, Minimum_requirements, Hw_suggested, Publisher, Img_link, Genres, "
 	."Platforms, Vote_multiplayer, Vote_everyeye, Vote_ps4_multiplayer, Vote_ps3_multiplayer, Vote_pc_multiplayer, Vote_x360_multiplayer, "
-	."Vote_xone_multplayer, Data_ps4, Data_ps3, Data_pc, Data_x360, Data_xone, review_everyeye, review_multiplayer) "
+	."Vote_xone_multplayer, Data_ps4, review_everyeye, review_multiplayer) "
 	."VALUES ('".$game->name."',"
 			."'".$game->link."',"
 			."'".$game->multiplayer."',"
@@ -43,11 +43,7 @@ foreach ($gameMerged as $game) {
 		    .$game->vote_multiplayer["PC Windows"].","
 		    .$game->vote_multiplayer["Xbox 360"].","
 		    .$game->vote_multiplayer["Xbox One"].","
-		    ."'".$game->data["PS4"]."',"
-		    ."'".$game->data["Ps3"]."',"
-		    ."'".$game->data["Pc"]."',"
-		    ."'".$game->data["Xbox 360"]."',"
-		    ."'".$game->data["Xbox One"]."',"
+		    ."'".$game->data."',"
 			."'".$game->review_everyeye."',"
 			."'".$game->review_multiplayer."')";
 					
