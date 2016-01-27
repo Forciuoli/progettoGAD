@@ -50,8 +50,8 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$can_push = false;
 				
 				$temp = split(' ', $platforms);
-					for ($i = 0; $i < count($temp); $i++) {
-						$platform = $temp[$i];
+					for ($k = 0; $k < count($temp); $k++) {
+						$platform = $temp[$k];
 						if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROID GAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WII U")
 						{
 							array_push($game -> platform, $platform);
@@ -89,13 +89,13 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$game -> vote_everyeye["all"] = split(' ', $item -> {'vote'})[0];;
 			}
 			
-			//verrà preso in seguito solo nel caso non ci sia il gioco su multiplayer
+			//verrï¿½ preso in seguito solo nel caso non ci sia il gioco su multiplayer
 			if(isset($item -> genre_everyeye))
 			{
 				array_push($game -> genre, $item -> genre_everyeye);
 			}
 			
-			//se c'è il link della recensione
+			//se c'ï¿½ il link della recensione
 			if(isset($item -> link_review))
 			{
 				$link_review = $item -> link_review;
