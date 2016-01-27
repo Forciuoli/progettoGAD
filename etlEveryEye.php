@@ -52,7 +52,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				$temp = split(' ', $platforms);
 					for ($i = 0; $i < count($temp); $i++) {
 						$platform = $temp[$i];
-						if($platform != "iPhone" && $platform != "iPad" && $platform != "Android Games" && $platform != "3DS" && $platform != "PSVita" && $platform != "Wii U")
+						if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROID GAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WII U")
 						{
 							array_push($game -> platform, $platform);
 							$game -> data[$platform] = $date;
