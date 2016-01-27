@@ -65,9 +65,9 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 			if(isset($item -> dateplatforms))
 			{
 				$date_platforms = $item -> dateplatforms;
-				$months = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
+				$months2 = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
 				$datesplit = split(' ',$date_platforms);
-				$datastring=$datesplit[0]."/".$months[strtolower($datesplit[1])]."/".$datesplit[2];
+				$datastring=$datesplit[0]."/".$months2[strtolower($datesplit[1])]."/".$datesplit[2];
 				
 				$game -> data = $datastring;
 			}

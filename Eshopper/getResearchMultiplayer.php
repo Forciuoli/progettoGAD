@@ -1,7 +1,6 @@
 <?php
 require "../classGame.php";
-$name1="call of duty black ops 3";
-function getResearchMultiPlayer(){
+function getResearchMultiPlayer($name1){
 $gameE=new Game("","","","");
 $months = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
 
