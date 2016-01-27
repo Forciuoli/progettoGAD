@@ -18,8 +18,8 @@ foreach ($gameMultiplayer as $gameM) {
 			$game=new Game($gameM->name,"",$gameE->publisher,$gameE->img_link);
 			$game->cooperative=$gameE->cooperative;
 			$game->multiplayer=$gameE->multiplayer;
-			$game->hw_suggested=$gameE->hw_suggested;
-			$game->minimum_requirements=$gameE->minimum_requirements;
+			$game->hw_suggested="";
+			$game->minimum_requirements="";
 			$game->data=$gameE->data;
 			$game->genre=$gameM->genre;
 			$game->platform=$gameE->platform;
@@ -116,7 +116,7 @@ foreach ($gameNotE as $gm) {
 				{
 					$datastring="00/".$months[$datesplit[0]]."/".$datesplit[1];
 				}
-				$gm->data[$platform]=$datastring;
+				$gm->data=$datastring;
 			
 			}
 		}

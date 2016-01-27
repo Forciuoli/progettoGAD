@@ -9,7 +9,7 @@ class Game {
 	public $vote_everyeye = array("all"=>"0");
 	public $genre = array();
 	public $platform = array();
-	public $data = array("Ps3"=>"", "Xbox One"=>"", "Xbox 360"=>"","Pc"=>"","PS4"=>"");
+	public $data;
 	public $multiplayer;
 	public $cooperative;
 	public $minimum_requirements;
