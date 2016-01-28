@@ -3,6 +3,8 @@ var global_platform="all";
 var global_page;
 var global_idGame;
 
+
+
 function getDetailGame(idGame)
 {
 	global_idGame = idGame;
@@ -142,6 +144,33 @@ function getGame(nameGame)
 //	  }
 //	  xhttp.open("GET", "getGame.php?name="+nameGame, true);
 //	  xhttp.send();
+	
+	var opts = {
+			  lines: 11 // The number of lines to draw
+			, length: 40 // The length of each line
+			, width: 20 // The line thickness
+			, radius: 53 // The radius of the inner circle
+			, scale: 0.75 // Scales overall size of the spinner
+			, corners: 0.9 // Corner roundness (0..1)
+			, color: '#000' // #rgb or #rrggbb or array of colors
+			, opacity: 0.15 // Opacity of the lines
+			, rotate: 0 // The rotation offset
+			, direction: 1 // 1: clockwise, -1: counterclockwise
+			, speed: 0.6 // Rounds per second
+			, trail: 79 // Afterglow percentage
+			, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+			, zIndex: 2e9 // The z-index (defaults to 2000000000)
+			, className: 'spinner' // The CSS class to assign to the spinner
+			, top: '50%' // Top position relative to parent
+			, left: '50%' // Left position relative to parent
+			, shadow: false // Whether to render a shadow
+			, hwaccel: false // Whether to use hardware acceleration
+			, position: 'absolute' // Element positioning
+			}
+			var target = document.getElementById('dark_cover');
+			var spinner = new Spinner(opts).spin(target);
+    document.getElementById("dark_cover").style.display = "";
+
 	var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -150,6 +179,8 @@ function getGame(nameGame)
 	     document.getElementById("detailGame").innerHTML = xhttp.responseText;
 	     document.getElementById("mainSection").style.display = "none";
 	
+	     document.getElementById("dark_cover").style.display = "none";
+	   
 	     var i = 0 , prec;
 	     var j = 0 , prec1;
 	     var degs = $("#prec").attr("class").split(' ')[1];

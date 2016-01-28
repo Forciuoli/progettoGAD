@@ -1,4 +1,5 @@
 <?php
+set_time_limit(0);
 require "../classGame.php";
 function getResearchMultiPlayer($name1){
 $gameE=new Game("","","","");
@@ -197,7 +198,7 @@ function levenshteinMatch($searched,$someObject)
 		}
 	}
 
-	if($min<3)
+	if($min<5)
 	{
 		return $matchLink;
 	}

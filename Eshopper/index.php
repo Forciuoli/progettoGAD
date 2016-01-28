@@ -41,6 +41,7 @@ $conn -> close();
 	<link href="css/responsive.css" rel="stylesheet">
 	<script src="js/index.js"></script>
 	<script src="js/jquery.js"></script>
+	<script src="js/spin.js"></script>
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -53,6 +54,8 @@ $conn -> close();
 </head><!--/head-->
 
 <body>
+	<div id="dark_cover" style="display:none"></div>
+
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -128,7 +131,6 @@ $conn -> close();
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-	
 	
 	
 	<section id="mainSection">
