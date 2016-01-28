@@ -1,7 +1,8 @@
 <?php
-set_time_limit(0);
 require "../classGame.php";
 function getResearchMultiPlayer($name1){
+	set_time_limit(0);
+	
 $gameE=new Game("","","","");
 $months = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
 
@@ -36,7 +37,7 @@ if($link=="")
 	   	$someObject = json_decode($result);
 	   	$link=levenshteinMatch(strtolower($name1),$someObject);
 	   	if($link=="")
-	   		echo "non trovato";
+	   		return "non trovato";
 			   	
 }
 

@@ -31,6 +31,9 @@ if(isset($_GET["name"]))
 		$gameE = getResearchEveryEye($name);
 		$gameM = getResearchMultiplayer($name);
 		
+		if($gameM != "non trovato" && $gameE != "non trovato")
+		{
+			
 			$game=new Game($gameE->name,"",$gameM->publisher,$gameE->img_link);
 			$game->cooperative=$gameE->cooperative;
 			$game->multiplayer=$gameE->multiplayer;
@@ -43,16 +46,54 @@ if(isset($_GET["name"]))
 			$game->vote_everyeye=$gameE->vote_everyeye;
 			$game->review_everyeye=$gameE->review_everyeye;
 			$game->review_multiplayer=$gameM->review_multiplayer;
-
 			
-			$game->review_everyeye = str_replace("'", "''", $game->review_everyeye);
-			$game->review_multiplayer = str_replace("'", "''", $game->review_multiplayer);
-			$game->name = str_replace("'", "''", $game->name);
-			$game->multiplayer = str_replace("'", "''", $game->multiplayer);
-			$game->minimum_requirements = str_replace("'", "''", $game->minimum_requirements);
-			$game->publisher = str_replace("'", "''", $game->publisher);
-			$game->name = str_replace("'", "''", $game->name);
+		}
+		else if($gameM == "non trovato" && $gameE == "non trovato")
+		{
+			return "";
+		}
+		else if($gameM == "non trovato")
+		{
 			
+			$game=new Game($gameE->name,"",$gameE->publisher,$gameE->img_link);
+			$game->cooperative=$gameE->cooperative;
+			$game->multiplayer=$gameE->multiplayer;
+			$game->hw_suggested="";
+			$game->minimum_requirements="";
+			$game->data=$gameE->data;
+			$game->genre=$gameE->genre;
+			$game->platform=$gameE->platform;
+			$game->vote_multiplayer=0;
+			$game->vote_everyeye=$gameE->vote_everyeye;
+			$game->review_everyeye=$gameE->review_everyeye;
+			$game->review_multiplayer="";
+				
+			
+			
+		}
+		else if($gameE == "non trovato")
+		{
+			$game=new Game($gameM->name,"",$gameM->publisher,$gameM->img_link);
+			$game->cooperative="";
+			$game->multiplayer="";
+			$game->hw_suggested="";
+			$game->minimum_requirements="";
+			$game->data=$gameM->data;
+			$game->genre=$gameM->genre;
+			$game->platform=$gameM->platform;
+			$game->vote_multiplayer=$gameM->vote_multiplayer;
+			$game->vote_everyeye=0;
+			$game->review_everyeye="";
+			$game->review_multiplayer=$gameM->review_multiplayer;
+		}
+		
+		$game->review_everyeye = str_replace("'", "''", $game->review_everyeye);
+		$game->review_multiplayer = str_replace("'", "''", $game->review_multiplayer);
+		$game->name = str_replace("'", "''", $game->name);
+		$game->multiplayer = str_replace("'", "''", $game->multiplayer);
+		$game->minimum_requirements = str_replace("'", "''", $game->minimum_requirements);
+		$game->publisher = str_replace("'", "''", $game->publisher);
+		$game->name = str_replace("'", "''", $game->name);
 			// Create connection
 			$conn = new mysqli($servername, $username, $password, $dbname);
 			// Check connection
@@ -96,7 +137,6 @@ if(isset($_GET["name"]))
 																																													}
 		
 																																													$sql = "SELECT * FROM games where Name='".$game->name."'";
-																																													echo $sql;
 																																													$result = $conn->query($sql);
 																																													
 																																													$conn -> close();
@@ -106,7 +146,7 @@ if(isset($_GET["name"]))
 																																														while($row = $result->fetch_assoc()) {																																													
 	echo '<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
-						<div id="idGame">'.$row['Id'].'</div>
+						<div id="idGame" style="display:none">'.$row['Id'].'</div>
 									<button onclick="hideDetail()" type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Ritorna all &apos; elenco prodotti

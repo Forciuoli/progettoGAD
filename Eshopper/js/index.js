@@ -175,6 +175,12 @@ function getGame(nameGame)
 	  xhttp.onreadystatechange = function() {
 	    if (xhttp.readyState == 4 && xhttp.status == 200) {
 	    
+	     if(xhttp.responseText == "")
+	     {
+	    	 alert("Gioco non trovato!");
+		     document.getElementById("dark_cover").style.display = "none";
+	    	 return;
+	     }
 	     document.getElementById("detailGame").style.display = "";
 	     document.getElementById("detailGame").innerHTML = xhttp.responseText;
 	     document.getElementById("mainSection").style.display = "none";
