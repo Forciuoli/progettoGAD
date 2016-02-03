@@ -63,7 +63,6 @@ foreach ($gameNotE as $gm) {
 				$link=substr($gm->link,0,$index);
 				$plat="-per-".$platform.".html";
 				$link=$link.$plat;
-				echo $link."</br>";
 				$ch = curl_init("https://api.import.io/store/connector/ee6f2895-03d9-41e3-a099-97025ea0e7d7/_query?input=webpage/url:".urlencode($link)."&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
 				// Disable SSL verification
 				curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );

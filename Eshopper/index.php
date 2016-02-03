@@ -63,7 +63,7 @@ $conn -> close();
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 8215</a></li>
 								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
 							</ul>
 						</div>
@@ -256,7 +256,7 @@ $conn -> close();
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								<li><a href="" onclick="getFilteredGames('','all','');return false;"> <span class="pull-right"></span>Tutte</a></li>
-									<li class="active"><a href="" onclick="getFilteredGames('','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
+									<li><a href="" onclick="getFilteredGames('','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
 									<li><a href="" onclick="getFilteredGames('','PS4','');return false;"> <span class="pull-right"></span>Ps4</a></li>
 									<li><a href="" onclick="getFilteredGames('','PS3','');return false;"> <span class="pull-right"></span>Ps3</a></li>
 									<li><a href="" onclick="getFilteredGames('','XbOX 360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>

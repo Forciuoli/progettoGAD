@@ -62,7 +62,6 @@ function getDetailByIdGame($idGame)
 								        </div>
 								    </div>
 								</div>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->

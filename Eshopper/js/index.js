@@ -2,7 +2,10 @@ var global_genre="all";
 var global_platform="all";
 var global_page;
 var global_idGame;
-
+var global_timeout1;
+var global_timeout2;
+var global_timeout3;
+var global_timeout4;
 
 
 function getDetailGame(idGame)
@@ -22,12 +25,12 @@ function getDetailGame(idGame)
 	     var degs1 = $("#prec1").attr("class").split(' ')[1];
 	     var activeBorder = $("#activeBorder");
 	     var activeBorder1 = $("#activeBorder1");
-	     setTimeout(function(){
+	     global_timeout1=setTimeout(function(){
 	         loopit("c");
 	         
 	     },1);
 	     
-	     setTimeout(function(){
+	     global_timeout2=setTimeout(function(){
 	         loopit1("c");
 	         
 	     },1);
@@ -52,7 +55,7 @@ function getDetailGame(idGame)
 	      }
 	      
 	      
-	      setTimeout(function(){
+	      global_timeout3=setTimeout(function(){
 	              loopit("c");
 	      },1);
 	      
@@ -80,7 +83,7 @@ function getDetailGame(idGame)
 	      }
 	      
 	      
-	      setTimeout(function(){
+	      global_timeout4=setTimeout(function(){
 	              loopit1("c");
 	      },1);
 	      
@@ -94,6 +97,10 @@ function getDetailGame(idGame)
 	  xhttp2.onreadystatechange = function() {
 	    if (xhttp2.readyState == 4 && xhttp2.status == 200) {
 	     document.getElementById("comparaPrezzi").innerHTML = xhttp2.responseText;
+	     clearTimeout(global_timeout1);
+	     clearTimeout(global_timeout2);
+	     clearTimeout(global_timeout3);
+	     clearTimeout(global_timeout4);
 	    		}
 	  		};
 	  		
@@ -117,6 +124,7 @@ function getFilteredGames(genre,platform,page)
 	  xhttp.onreadystatechange = function() {
 		    if (xhttp.readyState == 4 && xhttp.status == 200) {
 		     document.getElementById("elencoGiochi").innerHTML = xhttp.responseText;
+		     
 		    }
 	  }
 	  xhttp.open("GET", "getFilteredGames.php?genre="+global_genre+"&platform="+global_platform, true);
@@ -127,7 +135,10 @@ function hideDetail()
 {
     document.getElementById("mainSection").style.display = "";
     document.getElementById("detailGame").style.display = "none";
-
+    clearTimeout(global_timeout1);
+    clearTimeout(global_timeout2);
+    clearTimeout(global_timeout3);
+    clearTimeout(global_timeout4);
 
 }
 

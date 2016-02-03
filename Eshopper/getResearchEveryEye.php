@@ -92,6 +92,7 @@ function getResearchEveryEye($name)
 			
 		if(isset($item -> {'vote'}))
 		{
+			
 			$v = split(' ', $item -> {'vote'})[0];
 			
 				
@@ -102,13 +103,13 @@ function getResearchEveryEye($name)
 			$game -> vote_everyeye["all"] = $v;
 		}
 			
-		//verrà preso in seguito solo nel caso non ci sia il gioco su multiplayer
+		//verrï¿½ preso in seguito solo nel caso non ci sia il gioco su multiplayer
 		if(isset($item -> genre_everyeye))
 		{
 			array_push($game -> genre, $item -> genre_everyeye);
 		}
 			
-		//se c'è il link della recensione
+		//se c'ï¿½ il link della recensione
 		if(isset($item -> link_review))
 		{
 			$link_review = $item -> link_review;
@@ -128,6 +129,10 @@ function getResearchEveryEye($name)
 		if($can_push)
 		{
 			return $game;
+		}
+		else
+		{
+			return "non trovato";
 		}
 		
 	

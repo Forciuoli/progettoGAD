@@ -21,11 +21,12 @@ $link=levenshteinMatch(strtolower($name1),$someObject);
 if($link=="")
 {
 	  
-		if(strpos($name1,' 3 ') !== false || strpos($name1,' 3') !== false || strpos($name1,' 2') !== false || strpos($name1,' 2 ') !== false || strpos($name1,' 4 ') !== false || strpos($name1,' 4') !== false)
+		if(strpos($name1,' 3 ') !== false || strpos($name1,' 3') !== false || strpos($name1,' 2') !== false || strpos($name1,' 2 ') !== false || strpos($name1,' 4 ') !== false || strpos($name1,' 4') !== false || strpos($name1,' 5 ') !== false || strpos($name1,' 5'))
 	   	{
 	   		$name1 = str_replace('3', 'III', $name1);
 	   		$name1 = str_replace('2', 'II', $name1);
 	   		$name1 = str_replace('4:', 'IV:', $name1);
+	   		$name1 = str_replace('5', 'V:', $name1);
 	   	}
 	   	$ch = curl_init("https://api.import.io/store/connector/b39989fa-8435-4d9a-994f-acc5e5691143/_query?input=webpage/url:http%3A%2F%2Fmultiplayer.it%2Fricerca%2F%3Fq%3Dgioco%2520".urlencode($name1)."&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326");
 	   	// Disable SSL verification
@@ -88,21 +89,26 @@ foreach ($platforms as $platform) {
 			
 			if(isset($item->img))
 				$gameE->img_link= $item->img;
+				if(isset($item->name)){
+					$par=strpos($item->name,'(');
+					$gameE->name= substr($item->name, 0,$par);
+				}
+					
 				if(isset($item->publisher))
 					$gameE->publisher= $item->publisher;
 			
 					if(isset($item->{'vote'}))
 					{
 						if($platform=="ps3")
-							$gameE->vote_multiplayer["PlayStation 3"]=$item->{'vote'};
+							$gameE->vote_multiplayer["PlayStation 3"]=$item->{'vote'}=="S.V."?0:$item->{'vote'};
 							else if($platform=="ps4")
-								$gameE->vote_multiplayer["PlayStation 4"]=$item->{'vote'};
+								$gameE->vote_multiplayer["PlayStation 4"]=$item->{'vote'}=="S.V."?0:$item->{'vote'};
 								else if($platform=="pc")
-									$gameE->vote_multiplayer["PC Windows"]=$item->{'vote'};
+									$gameE->vote_multiplayer["PC Windows"]=$item->{'vote'}=="S.V."?0:$item->{'vote'};
 									else if($platform=="x360")
-										$gameE->vote_multiplayer["Xbox 360"]=$item->{'vote'};
+										$gameE->vote_multiplayer["Xbox 360"]=$item->{'vote'}=="S.V."?0:$item->{'vote'};
 										else if($platform=="xone")
-											$gameE->vote_multiplayer["Xbox One"]=$item->{'vote'};
+											$gameE->vote_multiplayer["Xbox One"]=$item->{'vote'}=="S.V."?0:$item->{'vote'};
 					}
 			
 					if($platform=="ps3")
@@ -117,22 +123,29 @@ foreach ($platforms as $platform) {
 										$platform="Xbox One";
 											
 										array_push($gameE->platform,$platform);
-										$datesplit=split(" ",$item->date);
-										if(count($datesplit)==3)
-										{
-											if(array_key_exists($datesplit[1],$months))
-												$datastring=$datesplit[0]."/".$months[$datesplit[1]]."/".$datesplit[2];
-												else
-													$datastring="00/00/".$datesplit[2];
+										if($item->date=="non disponibile"){
+											$datastring="non disponibile";
 										}
-										else if(count($datesplit)==0)
+										else
 										{
-											$datastring="00/00/".$datesplit[0];
+											$datesplit=split(" ",$item->date);
+											if(count($datesplit)==3)
+											{
+												if(array_key_exists($datesplit[1],$months))
+													$datastring=$datesplit[0]."/".$months[$datesplit[1]]."/".$datesplit[2];
+													else
+														$datastring="00/00/".$datesplit[2];
+											}
+											else if(count($datesplit)==0)
+											{
+												$datastring="00/00/".$datesplit[0];
+											}
+											else if(count($datesplit)==2)
+											{
+												$datastring="00/".$months[$datesplit[0]]."/".$datesplit[1];
+											
 										}
-										else if(count($datesplit)==2)
-										{
-											$datastring="00/".$months[$datesplit[0]]."/".$datesplit[1];
-										}
+}
 										$gameE->data=$datastring;
 										
 		

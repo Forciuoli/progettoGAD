@@ -42,8 +42,8 @@ if(isset($_GET["name"]))
 			$game->data=$gameE->data;
 			$game->genre=$gameM->genre;
 			$game->platform=$gameE->platform;
-			$game->vote_multiplayer=$gameM->vote_multiplayer;
-			$game->vote_everyeye=$gameE->vote_everyeye;
+			$game->vote_multiplayer["all"]=$gameM->vote_multiplayer["all"];
+			$game->vote_everyeye["all"]=$gameE->vote_everyeye["all"];
 			$game->review_everyeye=$gameE->review_everyeye;
 			$game->review_multiplayer=$gameM->review_multiplayer;
 			
@@ -63,8 +63,8 @@ if(isset($_GET["name"]))
 			$game->data=$gameE->data;
 			$game->genre=$gameE->genre;
 			$game->platform=$gameE->platform;
-			$game->vote_multiplayer=0;
-			$game->vote_everyeye=$gameE->vote_everyeye;
+			$game->vote_multiplayer["all"]=0;
+			$game->vote_everyeye["all"]=$gameE->vote_everyeye["all"];
 			$game->review_everyeye=$gameE->review_everyeye;
 			$game->review_multiplayer="";
 				
@@ -81,8 +81,8 @@ if(isset($_GET["name"]))
 			$game->data=$gameM->data;
 			$game->genre=$gameM->genre;
 			$game->platform=$gameM->platform;
-			$game->vote_multiplayer=$gameM->vote_multiplayer;
-			$game->vote_everyeye=0;
+			$game->vote_multiplayer["all"]=$gameM->vote_multiplayer["all"];
+			$game->vote_everyeye["all"]=0;
 			$game->review_everyeye="";
 			$game->review_multiplayer=$gameM->review_multiplayer;
 		}
@@ -182,7 +182,7 @@ if(isset($_GET["name"]))
 								        </div>
 								    </div>
 								</div>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+								
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
