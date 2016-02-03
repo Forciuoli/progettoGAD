@@ -189,8 +189,10 @@ function levenshteinMatch($searched,$someObject)
 	$matchLink="";
 
 	for ($i = 0; $i < count($someObject->results); $i++) {
+		$name = strtolower($someObject->results[$i]->{'name/_text'});
+		$search = strtolower($searched);
 		
-		$lev=levenshtein(strtolower($searched), strtolower($someObject->results[$i]->{'name/_text'}));
+		$lev=levenshtein($search, $name);
 	
 		if($lev<$min)
 		{
@@ -198,15 +200,27 @@ function levenshteinMatch($searched,$someObject)
 			$matchLink=$someObject->results[$i]->{'name'};
 		}
 	}
-
-	if($min<5)
+	
+	if($min<3)
 	{
 		return $matchLink;
 	}
-	else
-	{
-		return "";
-	}
+	
 
+	for ($i = 0; $i < count($someObject->results); $i++) {
+		$name = strtolower($someObject->results[$i]->{'name/_text'});
+		$search = strtolower($searched);
+	
+		$name = str_replace(' ','', $name);
+		$search = str_replace(' ','', $search);
+		
+		if(strpos($name,$search) !== false)
+		{
+			return $someObject->results[$i]->{'name'};
+		}
+		
+	}
+	
+	return "";
 
 }

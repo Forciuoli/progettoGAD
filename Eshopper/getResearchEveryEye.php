@@ -92,7 +92,14 @@ function getResearchEveryEye($name)
 			
 		if(isset($item -> {'vote'}))
 		{
-			$game -> vote_everyeye["all"] = split(' ', $item -> {'vote'})[0];;
+			$v = split(' ', $item -> {'vote'})[0];
+			
+				
+			if($v == "")
+			{
+				$v = 0;
+			}
+			$game -> vote_everyeye["all"] = $v;
 		}
 			
 		//verrà preso in seguito solo nel caso non ci sia il gioco su multiplayer

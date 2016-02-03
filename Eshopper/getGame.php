@@ -137,6 +137,7 @@ if(isset($_GET["name"]))
 																																													}
 		
 																																													$sql = "SELECT * FROM games where Name='".$game->name."'";
+																																													echo $sql;
 																																													$result = $conn->query($sql);
 																																													
 																																													$conn -> close();
