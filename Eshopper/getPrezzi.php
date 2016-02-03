@@ -178,7 +178,7 @@ else
 	array_push($games,  $prezziMinimiAmazon);
 	array_push($games,  $prezziMinimiEbay);
 	
-	$platforms =$gameDB["Platforms"];;
+	$platforms = strtolower($gameDB["Platforms"]);
 	$prezzi=$games;
 	$avviso="non disponibile";
 	$ottocento="800";
@@ -199,13 +199,13 @@ else
 		$table.='<tr><td><img style="width:200px;height:60px" src="/gadProject/Eshopper/images/product-details/ps3.png"></td><td><a href='.$prezzi[0]["PS3_link"].' style="color:green;font-size:16px;font-weight:700;">'.($prezzi[0]["PS3"]==$ottocento?$avviso:($prezzi[0]["PS3"].' €')).'</a></td><td><a href='.$prezzi[1]["PS3_link"].' style="color:green;font-size:16px;font-weight:700;">'.($prezzi[1]["PS3"]==$ottocento?$avviso:($prezzi[1]["PS3"].' €')).'</a></td></tr>';
 	
 	}
-	if(stripos($platforms,"xbox one")!==false)
+	if(stripos($platforms,"xboxone")!==false)
 	{
 		$sql.= "INSERT INTO cache VALUES (".str_replace(',', '.', $prezziMinimiAmazon["XBOXONE"]).",".str_replace(',', '.', $prezziMinimiEbay["XBOXONE"]).",'XBOXONE','".$prezziMinimiAmazon["XBOXONE_link"]."','".$prezziMinimiEbay["XBOXONE_link"]."',".$idGame.",'".date('Y-m-d G:i:s')."');";
 		$table.='<tr><td><img style="width:200px;height:60px" src="/gadProject/Eshopper/images/product-details/xboxone.png"></td><td><a href='.$prezzi[0]["XBOXONE_link"].' style="color:green;font-size:16px;font-weight:700;">'.($prezzi[0]["XBOXONE"]==$ottocento?$avviso:($prezzi[0]["XBOXONE"].' €')).'</a></td><td><a href='.$prezzi[1]["XBOXONE_link"].' style="color:green;font-size:16px;font-weight:700;">'.($prezzi[1]["XBOXONE"]==$ottocento?$avviso:($prezzi[1]["XBOXONE"].' €')).'</a></td></tr>';
 	
 	}
-	if(stripos($platforms,"xbox 360")!==false)
+	if(stripos($platforms,"xbox360")!==false)
 	{
 		$sql.= "INSERT INTO cache VALUES (".str_replace(',', '.', $prezziMinimiAmazon["XBOX360"]).",".str_replace(',', '.', $prezziMinimiEbay["XBOX360"]).",'XBOX360','".$prezziMinimiAmazon["XBOX360_link"]."','".$prezziMinimiEbay["XBOX360_link"]."',".$idGame.",'".date('Y-m-d G:i:s')."');";
 		$table.='<tr><td><img style="width:200px;height:60px" src="/gadProject/Eshopper/images/product-details/xbox360.png"></td><td><a href='.$prezzi[0]["XBOX360_link"].' style="color:green;font-size:16px;font-weight:700;">'.($prezzi[0]["XBOX360"]==$ottocento?$avviso:($prezzi[0]["XBOX360"].' €')).'</a></td><td><a href='.$prezzi[1]["XBOX360_link"].' style="color:green;font-size:16px;font-weight:700;">'.($prezzi[1]["XBOX360"]==$ottocento?$avviso:($prezzi[1]["XBOX360"].' €')).'</a></td></tr>';

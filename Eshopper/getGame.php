@@ -147,7 +147,7 @@ if(isset($_GET["name"]))
 																																														while($row = $result->fetch_assoc()) {																																													
 	echo '<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
-						<div id="idGame" style="display:none">'.$row['Id'].'</div>
+						<div id="idGame" style="display:none;">'.$row['Id'].'</div>
 									<button onclick="hideDetail()" type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Ritorna all &apos; elenco prodotti
@@ -189,63 +189,13 @@ if(isset($_GET["name"]))
 										<div class="category-tab shop-details-tab"><!--category-tab-->
 						<div class="col-sm-12" style="margin-bottom:-30px">
 							<ul class="nav nav-tabs">
-								<li><a href="#details" data-toggle="tab">Dettagli</a></li>
 								<li><a href="#reviewMultiplayer" data-toggle="tab">Recensione MultiPlayer</a></li>
 								<li><a href="#reviewEveryEye" data-toggle="tab">Recensione EveryEye</a></li>
 								<li><a href="#comparaPrezzi" data-toggle="tab">Compara Prezzi</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
-							<div class="tab-pane fade" id="details" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							
 																																													
 							<div class="tab-pane fade" id="reviewMultiplayer" >
 								'.$row['review_multiplayer'].'
