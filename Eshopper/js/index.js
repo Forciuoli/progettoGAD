@@ -1,5 +1,7 @@
 var global_genre="all";
 var global_platform="all";
+var global_elem_genre=null;
+var global_elem_platform=null;
 var global_page;
 var global_idGame;
 var global_timeout1;
@@ -30,11 +32,15 @@ function getDetailGame(idGame)
 	         
 	     },1);
 	     
+	   
+	     
 	     global_timeout2=setTimeout(function(){
 	         loopit1("c");
 	         
 	     },1);
 
+	    
+	     
 	  function loopit(dir){
 	      if (dir == "c")
 	          i++
@@ -42,9 +48,17 @@ function getDetailGame(idGame)
 	          i--;
 	      if (i < 0)
 	          i = 0;
-	      if (i > degs)
-	          i = degs;
+	      if (i >= degs)
+	      {
+	    	  i = degs;
+	    	  clearTimeout(global_timeout3);
+	    	  prec = (100*i)/3600;   
+		      $("#prec").html(parseFloat(prec).toFixed(1));
+	    	  return;
+	      }
+	          
 	      prec = (100*i)/3600;   
+		    
 	      $("#prec").html(parseFloat(prec).toFixed(1));
 	      
 	      if (i<180){
@@ -70,8 +84,15 @@ function getDetailGame(idGame)
 	          j--;
 	      if (j < 0)
 	          j = 0;
-	      if (j > degs1)
-	          j = degs1;
+	      if (j >= degs1)
+	      {
+	    	  j = degs1;
+	    	  prec1 = (100*j)/3600;   
+		      $("#prec1").html(parseFloat(prec1).toFixed(1));
+	    	  clearTimeout(global_timeout4);
+	    	  return;
+	      }
+	          
 	      prec1 = (100*j)/3600;   
 	      $("#prec1").html(parseFloat(prec1).toFixed(1));
 	     
@@ -90,17 +111,13 @@ function getDetailGame(idGame)
 	      
 	      
 	  }
-	  
-	  
+	    
 	  //chiamata ajax per mediator
 	  var xhttp2 = new XMLHttpRequest();
 	  xhttp2.onreadystatechange = function() {
 	    if (xhttp2.readyState == 4 && xhttp2.status == 200) {
 	     document.getElementById("comparaPrezzi").innerHTML = xhttp2.responseText;
-	     clearTimeout(global_timeout1);
-	     clearTimeout(global_timeout2);
-	     clearTimeout(global_timeout3);
-	     clearTimeout(global_timeout4);
+	
 	    		}
 	  		};
 	  		
@@ -113,21 +130,79 @@ function getDetailGame(idGame)
 	  xhttp.send();
 }
 
-function getFilteredGames(genre,platform,page)
+function getFilteredGames(elem,genre,platform,page,shift)
 {
-	if(genre!="")
-		global_genre=genre;
-	if(platform!="")
-		global_platform=platform;
-	var xhttp = new XMLHttpRequest();
-	  
-	  xhttp.onreadystatechange = function() {
-		    if (xhttp.readyState == 4 && xhttp.status == 200) {
-		     document.getElementById("elencoGiochi").innerHTML = xhttp.responseText;
-		     
-		    }
+	
+	if(elem!=null){
+	page=1;	
+	$('#accordian a').removeClass("cocc");
+	$('#accordian1 a').removeClass("cocc1");
+	
+		if(genre!=""){
+			global_genre=genre;
+			global_elem_genre=elem;
+			
+		}
+		if(platform!=""){
+			global_platform=platform;
+			global_elem_platform=elem;
+			
+		}
+		
+		  if(global_elem_genre!=null)
+		  global_elem_genre.classList.add("cocc");
+		  if(global_elem_platform!=null)
+		  global_elem_platform.classList.add("cocc1");
 	  }
-	  xhttp.open("GET", "getFilteredGames.php?genre="+global_genre+"&platform="+global_platform, true);
+	
+	 var str="";
+     //page=1;
+     //pag=1;
+		if(shift===undefined)
+	       shift=1;
+	    //if(page!==undefined)
+	       pag=page;
+	       page=shift;
+	    if(page>5)
+	    str+= "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',"+(page-5)+","+(page-5)+");return false;\">&laquo;</a></li>";
+	    for (i = 0; i < 5; i++) {
+	    	if(pag==(page+i))
+	    		str+= "<li  class=\"active\"><a href=\"\" onclick=\"getFilteredGames(null,'','',"+(page+i)+","+(page)+");return false;\">"+(page+i)+"</a></li>";
+	    	else
+	    		str+= "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',"+(page+i)+","+(page)+");return false;\">"+(page+i)+"</a></li>";
+	    }	
+	    str+= "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',"+(page+5)+","+(page+5)+");return false;\">&raquo;</a></li>";
+	
+	    var str1="";
+	     //page=1;
+	     //pag=1;
+			//if(shift!==undefined)
+		       
+		    //if(page!==undefined)
+		    if(page>5)
+		    str1+= "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',"+(page-5)+","+(page-5)+");return false;\">&laquo;</a></li>";
+		    for (i = 0; i < 5; i++) {
+		    	if(pag==(page+i)){
+		    		str1+= "<li  class=\"active\"><a href=\"\" onclick=\"getFilteredGames(null,'','',"+(page+i)+","+(page)+");return false;\">"+(page+i)+"</a></li>";
+		    		break;
+		    	}else
+		    		str1+= "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',"+(page+i)+","+(page)+");return false;\">"+(page+i)+"</a></li>";
+		    }
+		    
+		var xhttp = new XMLHttpRequest();
+		  
+		  xhttp.onreadystatechange = function() {
+			    if (xhttp.readyState == 4 && xhttp.status == 200) {
+			     document.getElementById("elencoGiochi").innerHTML = xhttp.responseText;
+			     
+			    if(xhttp.responseText=="0 results")
+				    str=str1;
+				    document.getElementById("paginator").innerHTML = str;
+			    }
+		  }
+	  
+	 // alert("getFilteredGames.php?genre="+global_genre+"&platform="+global_platform+"&page="+page+"&shift="+shift);
+	  xhttp.open("GET", "getFilteredGames.php?genre="+global_genre+"&platform="+global_platform+"&page="+pag+"&shift="+shift, true);
 	  xhttp.send();
 }
 
@@ -135,10 +210,7 @@ function hideDetail()
 {
     document.getElementById("mainSection").style.display = "";
     document.getElementById("detailGame").style.display = "none";
-    clearTimeout(global_timeout1);
-    clearTimeout(global_timeout2);
-    clearTimeout(global_timeout3);
-    clearTimeout(global_timeout4);
+   
 
 }
 
@@ -221,8 +293,14 @@ function getGame(nameGame)
 	          i--;
 	      if (i < 0)
 	          i = 0;
-	      if (i > degs)
-	          i = degs;
+	      if (i >= degs)
+	      {
+	    	  i = degs;
+	    	  prec = (100*i)/3600;   
+		      $("#prec").html(parseFloat(prec).toFixed(1));
+	    	  clearTimeout(global_timeout3);
+	    	  return;
+	      }
 	      prec = (100*i)/3600;   
 	      $("#prec").html(parseFloat(prec).toFixed(1));
 	      
@@ -234,7 +312,7 @@ function getGame(nameGame)
 	      }
 	      
 	      
-	      setTimeout(function(){
+	      global_timeout3=setTimeout(function(){
 	              loopit("c");
 	      },1);
 	      
@@ -249,10 +327,15 @@ function getGame(nameGame)
 	          j--;
 	      if (j < 0)
 	          j = 0;
-	      if (j > degs1)
-	          j = degs1;
-	      prec1 = (100*j)/3600;   
-	      $("#prec1").html(parseFloat(prec1).toFixed(1));
+	      if (j >= degs1)
+	      {
+	    	  j = degs1;
+	    	  prec1 = (100*j)/3600;   
+		      $("#prec1").html(parseFloat(prec1).toFixed(1));
+	    	  clearTimeout(global_timeout4);
+	    	  return;
+	      }
+	    
 	     
 	      if (j<180){
 	          activeBorder1.css('background-image','linear-gradient(' + (90+j) + 'deg, transparent 50%, #A2ECFB 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
@@ -262,7 +345,7 @@ function getGame(nameGame)
 	      }
 	      
 	      
-	      setTimeout(function(){
+	      global_timeout4=setTimeout(function(){
 	              loopit1("c");
 	      },1);
 	      
@@ -276,6 +359,7 @@ function getGame(nameGame)
 	  xhttp2.onreadystatechange = function() {
 	    if (xhttp2.readyState == 4 && xhttp2.status == 200) {
 	     document.getElementById("comparaPrezzi").innerHTML = xhttp2.responseText;
+	
 	    		}
 	  		};
 	  var idGame = document.getElementById("idGame").innerHTML;

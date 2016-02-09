@@ -60,25 +60,7 @@ $conn -> close();
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 8215</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
+					<img style="margin-left:25%;width:600px;height:80px" src="/gadProject/Eshopper/images/product-details/logo1.png">
 				</div>
 			</div>
 		</div><!--/header_top-->
@@ -90,34 +72,10 @@ $conn -> close();
 				<div class="row">
 					<div class="col-sm-9">
 						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
+			
 						</div>
 						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
-							</ul>
+							
 						</div>
 					</div>
 					<div class="col-sm-3">
@@ -142,109 +100,86 @@ $conn -> close();
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 						<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('all','','');return false;">Tutti</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'all','','');return false;">Tutti</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Action','','');return false;">Azione</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Action','','');return false;">Azione</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Adventure','','');return false;">Avventura</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Adventure','','');return false;">Avventura</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Casual','','');return false;">Casual</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Casual','','');return false;">Casual</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Gestionale','','');return false;">Gestionale(manageriale)</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Gestionale','','');return false;">Gestionale(manageriale)</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Guida','','');return false;">Gioco di guida</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Guida','','');return false;">Gioco di guida</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Ruolo','','');return false;">Gioco di ruolo(giapponese)</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Ruolo','','');return false;">Gioco di ruolo(giapponese)</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Online','','');return false;">Online</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Online','','');return false;">Online</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Picchiaduro','','');return false;">Picchiaduro</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Picchiaduro','','');return false;">Picchiaduro</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Platform','','');return false;">Platform</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Platform','','');return false;">Platform</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Puzzle','','');return false;">Puzzle</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Puzzle','','');return false;">Puzzle</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Simulazione','','');return false;">Simulazione</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Simulazione','','');return false;">Simulazione</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Sparatutto','','');return false;">Sparatutto</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Sparatutto','','');return false;">Sparatutto</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Sportivo','','');return false;">Sportivo</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Sportivo','','');return false;">Sportivo</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Strategico','','');return false;">Strategico</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Strategico','','');return false;">Strategico</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames('Survival','','');return false;">Survival</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Survival','','');return false;">Survival</a></h4>
 								</div>
 							</div>
 						</div><!--/category-products-->
 					
-						<div class="brands_products"><!--brands_products-->
-							<h2>Piattaforme</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-									<li><a href="" onclick="getFilteredGames('','all','');return false;"> <span class="pull-right"></span>Tutte</a></li>
-									<li><a href="" onclick="getFilteredGames('','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
-									<li><a href="" onclick="getFilteredGames('','PS4','');return false;"> <span class="pull-right"></span>Ps4</a></li>
-									<li><a href="" onclick="getFilteredGames('','PS3','');return false;"> <span class="pull-right"></span>Ps3</a></li>
-									<li><a href="" onclick="getFilteredGames('','XbOX 360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>
-									<li><a href="" onclick="getFilteredGames('','Xbox one','');return false;"> <span class="pull-right"></span>Xbox One</a></li>
-								</ul>
-							</div>
-						</div><!--/brands_products-->
-						
-						<div class="price-range"><!--price-range-->
-							<h2>Price Range</h2>
-							<div class="well text-center">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-								 <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-							</div>
-						</div><!--/price-range-->
-						
-						
 					
 					</div>
 				</div>
@@ -253,14 +188,14 @@ $conn -> close();
 					
 					
 					<div class="category-tab"><!--category-tab-->
-						<div class="col-sm-12">
+						<div id="accordian1" class="col-sm-12">
 							<ul class="nav nav-tabs">
-								<li><a href="" onclick="getFilteredGames('','all','');return false;"> <span class="pull-right"></span>Tutte</a></li>
-									<li><a href="" onclick="getFilteredGames('','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
-									<li><a href="" onclick="getFilteredGames('','PS4','');return false;"> <span class="pull-right"></span>Ps4</a></li>
-									<li><a href="" onclick="getFilteredGames('','PS3','');return false;"> <span class="pull-right"></span>Ps3</a></li>
-									<li><a href="" onclick="getFilteredGames('','XbOX 360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>
-									<li><a href="" onclick="getFilteredGames('','Xbox one','');return false;"> <span class="pull-right"></span>Xbox One</a></li>
+								<li><a href="" onclick="getFilteredGames(this,'','all','');return false;"> <span class="pull-right"></span>Tutte</a></li>
+									<li><a href="" onclick="getFilteredGames(this,'','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
+									<li><a href="" onclick="getFilteredGames(this,'','PS4','');return false;"> <span class="pull-right"></span>Ps4</a></li>
+									<li><a href="" onclick="getFilteredGames(this,'','PS3','');return false;"> <span class="pull-right"></span>Ps3</a></li>
+									<li><a href="" onclick="getFilteredGames(this,'','XbOX 360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>
+									<li><a href="" onclick="getFilteredGames(this,'','Xbox one','');return false;"> <span class="pull-right"></span>Xbox One</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
@@ -297,7 +232,7 @@ $conn -> close();
 				</div>
 						
 			</div>
-			<ul class="pagination">
+			<ul class="pagination" id="paginator">
 			              <?php
 			                $page=1;
 			                $pag=1;
@@ -306,14 +241,14 @@ $conn -> close();
 						    if(isset($_GET["page"]))
 						       $pag=$_GET["page"];
 						    if($page>5)
-						    echo '<li><a href="index.php?shift='.($page-5).'&page='.($page-5).'">&laquo;</a></li>';
+						    echo "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',".($page-5).",".($page-5).");return false;\">&laquo;</a></li>";
 						    for ($i = 0; $i < 5; $i++) {
 						    	if($pag==$page+$i)
-						    		echo '<li class="active"><a  href="index.php?page='.($page+$i).'&shift='.($page).'">'.($page+$i).'</a></li>';
+						    		echo "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',".($page+$i).",".($page).");return false;\">".($page+$i)."</a></li>";
 						    	else
-						    		echo '<li><a href="index.php?page='.($page+$i).'&shift='.($page).'">'.($page+$i).'</a></li>';
+						    		echo "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',".($page+$i).",".($page).");return false;\">".($page+$i)."</a></li>";
 						    }	
-						    echo '<li><a href="index.php?shift='.($page+5).'&page='.($page+5).'">&raquo;</a></li>';
+						    echo "<li><a href=\"\" onclick=\"getFilteredGames(null,'','',".($page+5).",".($page+5).");return false;\">&raquo;</a></li>";
 							?>
 						</ul>
 		</div>
@@ -327,8 +262,8 @@ $conn -> close();
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright � 2016 E-GAME Inc. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">ancora NOI</a></span></p>
+					<p class="pull-left"></p>
+					<p class="pull-right"> <span></span></p>
 				</div>
 			</div>
 		</div>

@@ -33,7 +33,7 @@ function getDetailByIdGame($idGame)
 										Ritorna all &apos; elenco prodotti
 									</button>
 							<div class="view-product">
-								<img src="'.$row['Img_link'].'" alt="" />
+								<img src="'.($row["Img_link"]==""?"/gadProject/Eshopper/images/product-details/imgNO.jpg":$row["Img_link"]).'" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 	
@@ -44,6 +44,7 @@ function getDetailByIdGame($idGame)
 								<p><b>Publisher:</b> '.$row['Publisher'].'</p>
 								<p><b>Generes:</b> '.str_replace("&", ",", $row['Genres']).'</p>
 								<p><b>Platform:</b> '.str_replace("&", ",", $row['Platforms']).'</p>
+								<p><b>Date:</b> '.$row['Data_ps4'].'</p>
 								<div class="container1">
 									<img src="/gadProject/Eshopper/images/product-details/everyeyeLogo.jpg" style="width:250px;height:100px"/>
 								    <div id="activeBorder" class="active-border">

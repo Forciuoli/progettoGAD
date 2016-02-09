@@ -107,7 +107,7 @@ foreach ($gameNotE as $gm) {
 					else
 						$datastring="00/00/".$datesplit[2];
 				}
-				else if(count($datesplit)==0)
+				else if(count($datesplit)==1)
 				{
 					$datastring="00/00/".$datesplit[0];
 				}

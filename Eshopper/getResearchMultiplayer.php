@@ -55,6 +55,7 @@ $item = $someObject->results[0];
 $platforms=split(",",$item->platform);
 foreach ($platforms as $platform) {
 	$platform=trim($platform);
+	
 	if($platform=="xone" || $platform=="ps4" || $platform=="pc"
 			|| $platform=="ps3" || $platform=="x360")
 	{
@@ -91,7 +92,8 @@ foreach ($platforms as $platform) {
 				$gameE->img_link= $item->img;
 				if(isset($item->name)){
 					$par=strpos($item->name,'(');
-					$gameE->name= substr($item->name, 0,$par);
+					if($par!==false)
+						$gameE->name= substr($item->name, 0,$par);
 				}
 					
 				if(isset($item->publisher))
@@ -123,6 +125,7 @@ foreach ($platforms as $platform) {
 										$platform="Xbox One";
 											
 										array_push($gameE->platform,$platform);
+										
 										if($item->date=="non disponibile"){
 											$datastring="non disponibile";
 										}
@@ -136,7 +139,7 @@ foreach ($platforms as $platform) {
 													else
 														$datastring="00/00/".$datesplit[2];
 											}
-											else if(count($datesplit)==0)
+											else if(count($datesplit)==1)
 											{
 												$datastring="00/00/".$datesplit[0];
 											}
@@ -191,6 +194,10 @@ foreach ($gameE->vote_multiplayer as $vote) {
 if($count!=0)
 {
 	$gameE->vote_multiplayer["all"]=$votes/$count;
+}
+
+if (empty($gameE->platform)) {
+	return "non trovato";
 }
 
 return $gameE;

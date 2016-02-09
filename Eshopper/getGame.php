@@ -31,6 +31,8 @@ if(isset($_GET["name"]))
 		$gameE = getResearchEveryEye($name);
 		$gameM = getResearchMultiplayer($name);
 		
+		
+		
 		if($gameM != "non trovato" && $gameE != "non trovato")
 		{
 			
@@ -137,7 +139,7 @@ if(isset($_GET["name"]))
 																																													}
 		
 																																													$sql = "SELECT * FROM games where Name='".$game->name."'";
-																																													echo $sql;
+																																													
 																																													$result = $conn->query($sql);
 																																													
 																																													$conn -> close();
@@ -153,7 +155,7 @@ if(isset($_GET["name"]))
 										Ritorna all &apos; elenco prodotti
 									</button>
 							<div class="view-product">
-								<img src="'.$row['Img_link'].'" alt="" />
+								<img src="'.($row["Img_link"]==""?"/gadProject/Eshopper/images/product-details/imgNO.jpg":$row["Img_link"]).'" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 																																													
@@ -162,8 +164,9 @@ if(isset($_GET["name"]))
 							<div class="product-information"><!--/product-information-->
 								<h2>'.$row['Name'].'</h2>
 								<p><b>Publisher:</b> '.$row['Publisher'].'</p>
-								<p><b>Generes:</b> '.str_replace("&", ",", $row['Genres']).'</p>
-								<p><b>Platform:</b> '.str_replace("&", ",", $row['Platforms']).'</p>
+								<p><b>Generes:</b> '.substr(str_replace("&", ",", $row['Genres']), 0, strlen($row['Genres'])-1).'</p>
+								<p><b>Platform:</b> '.substr(str_replace("&", ",", $row['Platforms']), 0, strlen($row['Platforms'])-1).'</p>
+							    <p><b>Date:</b> '.$row['Data_ps4'].'</p>
 								<div class="container1">
 									<img src="/gadProject/Eshopper/images/product-details/everyeyeLogo.jpg" style="width:250px;height:100px"/>
 								    <div id="activeBorder" class="active-border">
@@ -198,10 +201,10 @@ if(isset($_GET["name"]))
 							
 																																													
 							<div class="tab-pane fade" id="reviewMultiplayer" >
-								'.$row['review_multiplayer'].'
+								<div  style="padding-top:70px">'.$row['review_multiplayer'].'</div>
 							</div>
 							<div class="tab-pane fade" id="reviewEveryEye" >
-								'.$row['review_everyeye'].'
+								<div  style="padding-top:70px">'.$row['review_everyeye'].'</div>
 							</div>
 							<div class="tab-pane fade CSSTableGenerator" id="comparaPrezzi" >
 			

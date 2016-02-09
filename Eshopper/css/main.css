@@ -729,6 +729,47 @@ h2.title:before{
   text-transform: uppercase;
 }
 
+.category-products .panel-default .panel-heading:hover{
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #FE980F;
+  color: #696763;
+  border:0px;
+  cursor: default;
+  margin-right:0;
+  margin-left:0;
+}
+
+
+.cocc
+{
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  color: #FE980F !important;
+  border:0px;
+  cursor: default;
+  margin-right:0;
+  margin-left:0;
+}
+
+.cocc1
+{
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  color: #FFFFFF !important;
+  background-color: #eee;
+  border:0px;
+  cursor: default;
+  margin-right:0;
+  margin-left:0;
+}
+
 .panel-group .panel-heading + .panel-collapse .panel-body {
   border-top: 0 none;
 }
@@ -1020,7 +1061,7 @@ h2.title {
 	color:#fff;
 }
 
-.nav-tabs  li.active  a, .nav-tabs  li.active  a:hover, .nav-tabs  li.active  a:focus {
+.nav-tabs  li.active  a, .nav-tabs  li.active  a:hover{
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
