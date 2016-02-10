@@ -119,7 +119,12 @@ foreach ($gameNotE as $gm) {
 			
 			}
 		}
-		array_push($gameMerged,$gm);
+		
+
+		
+			array_push($gameMerged,$gm);
+		
+		
 }
 
 

@@ -58,7 +58,7 @@ function getResearchEveryEye($name)
 			$temp = split(' ', $platforms);
 			for ($i = 0; $i < count($temp); $i++) {
 				$platform = $temp[$i];
-				if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROIDGAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WIIU" && $platform != "N-GAGE" && $platform != "PSX")
+				if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROIDGAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WIIU" && $platform != "N-GAGE" && $platform != "PSX"  && $platform != "WII")
 				{
 					array_push($game -> platform, $platform);
 					$can_push = true;

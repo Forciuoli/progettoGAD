@@ -44,23 +44,28 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 			$game = new Game($name, $link, $publisher, $img_link);
 				
 			if(isset($item -> platforms))
-			{
-				$platforms = $item -> platforms;
-					
-				$can_push = false;
+		{
+			$platforms = $item -> platforms;
 				
-				$temp = split(' ', $platforms);
-					for ($k = 0; $k < count($temp); $k++) {
-						$platform = $temp[$k];
-						if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROID GAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WII U")
-						{
-							array_push($game -> platform, $platform);
-							$can_push = true;
-						}
-					}
-					
+			$can_push = false;
+			$platforms = strtoupper($platforms);
+			$platforms = str_replace("XBOX 360", "XBOX360", $platforms);
+			$platforms = str_replace("XBOX ONE", "XBOXONE", $platforms);
+			$platforms = str_replace("WII U", "WIIU", $platforms);
+			$platforms = str_replace("ANDROID GAMES", "ANDROIDGAMES", $platforms);
 				
+			$temp = split(' ', $platforms);
+			for ($i = 0; $i < count($temp); $i++) {
+				$platform = $temp[$i];
+				if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROIDGAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WIIU" && $platform != "N-GAGE" && $platform != "PSX"  && $platform != "WII")
+				{
+					array_push($game -> platform, $platform);
+					$can_push = true;
+				}
 			}
+				
+		
+		}
 			
 			if(isset($item -> dateplatforms))
 			{

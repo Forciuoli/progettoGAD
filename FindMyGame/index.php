@@ -30,7 +30,7 @@ $conn -> close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Home | E-Game</title>
+    <title>Home | Find My Game</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/cocc.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@ $conn -> close();
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
-					<img style="margin-left:25%;width:600px;height:80px" src="/gadProject/Eshopper/images/product-details/logo1.png">
+					<img style="margin-left:25%;width:600px;height:80px" src="/gadProject/FindMyGame/images/product-details/logo1.png">
 				</div>
 			</div>
 		</div><!--/header_top-->
@@ -120,7 +120,7 @@ $conn -> close();
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Gestionale','','');return false;">Gestionale(manageriale)</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Gestionale','','');return false;">Gestionale</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
@@ -130,7 +130,7 @@ $conn -> close();
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Ruolo','','');return false;">Gioco di ruolo(giapponese)</a></h4>
+									<h4 class="panel-title"><a href="" onclick="getFilteredGames(this,'Ruolo','','');return false;">Gioco di ruolo</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
