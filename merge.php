@@ -6,7 +6,7 @@ include "etlEveryEye.php";
 function getGameMerged(){
 $months = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
 $gameNotE=array();
-$gameMultiplayer=getGameMultiplayer();
+//$gameMultiplayer=getGameMultiplayer();
 $gameEveryeye=getGameEveryEye();
 $gameMerged=array();
 $flag=false;
@@ -47,6 +47,7 @@ foreach ($gameNotE as $gm) {
 		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		set_time_limit(0);
+		usleep(300);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		
@@ -68,6 +69,7 @@ foreach ($gameNotE as $gm) {
 				curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				set_time_limit(0);
+				usleep(300);
 				$result = curl_exec($ch);
 				curl_close($ch);
 				$someObject = json_decode($result);
@@ -148,6 +150,7 @@ foreach ($gameEveryeye as $gameE) {
 		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		set_time_limit(0);
+		usleep(300);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		$someObject = json_decode($result);
@@ -162,6 +165,7 @@ foreach ($gameEveryeye as $gameE) {
 		// Disable SSL verification
 		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		usleep(300);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		
@@ -182,6 +186,7 @@ foreach ($gameEveryeye as $gameE) {
 				curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				set_time_limit(0);
+				usleep(300);
 				$result = curl_exec($ch);
 				curl_close($ch);
 				$someObject = json_decode($result);
@@ -224,6 +229,7 @@ foreach ($gameEveryeye as $gameE) {
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 			// Disable SSL verification https://api.import.io/store/connector/0453b716-4774-4802-913e-e64060955f17/_query?input=webpage/url:http%3A%2F%2Fmultiplayer.it%2Frecensioni%2F158555-call-of-duty-black-ops-iii-mental-ops.html%3Fpiattaforma%3Dps4&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326
 			curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
+			usleep(300);
 			$result3 = curl_exec ( $ch );
 		
 		

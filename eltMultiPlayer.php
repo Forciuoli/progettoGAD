@@ -18,6 +18,7 @@ for($i=1;$i<500;$i++){
 		// Disable SSL verification
 		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		usleep(300);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		//https://api.import.io/store/data/ee6f2895-03d9-41e3-a099-97025ea0e7d7/_query?input/webpage/url=http%3A%2F%2Fmultiplayer.it%2Fgiochi%2Fgod-of-war-per-ps2.html&_user=12c26aee-8ae3-4b58-af08-e4df583faf99&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326
@@ -128,6 +129,7 @@ foreach ($games as $game) {
 	curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false );
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	set_time_limit(0);
+	usleep(300);
 	$result = curl_exec($ch);
 	
 	
@@ -147,6 +149,7 @@ foreach ($games as $game) {
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 			// Disable SSL verification https://api.import.io/store/connector/0453b716-4774-4802-913e-e64060955f17/_query?input=webpage/url:http%3A%2F%2Fmultiplayer.it%2Frecensioni%2F158555-call-of-duty-black-ops-iii-mental-ops.html%3Fpiattaforma%3Dps4&&_apikey=12c26aee8ae34b58af08e4df583faf9998be34fe53a13dfaa52cf5ddf1659d6a7b653a5b9635b9a5163de392f0cd19b9aee504b936fc41c39753801434669d86b936fd19499a91ddee477b8c5196a326
 			curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
+			usleep(300);
 			$result3 = curl_exec ( $ch );
 		
 		

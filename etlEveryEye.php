@@ -9,6 +9,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 	curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 	// Disable SSL verification
 	curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
+	usleep(300);
 	$result = curl_exec ( $ch );
 	curl_close ( $ch );
 	//echo $result;
@@ -21,6 +22,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 		// Disable SSL verification
 		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
+		usleep(300);
 		$result2 = curl_exec ( $ch );
 		curl_close ( $ch );
 		$someObject2 = json_decode ( $result2 );
@@ -55,8 +57,8 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 			$platforms = str_replace("ANDROID GAMES", "ANDROIDGAMES", $platforms);
 				
 			$temp = split(' ', $platforms);
-			for ($i = 0; $i < count($temp); $i++) {
-				$platform = $temp[$i];
+			for ($k = 0; $k < count($temp); $k++) {
+				$platform = $temp[$k];
 				if($platform != "IPHONE" && $platform != "IPAD" && $platform != "ANDROIDGAMES" && $platform != "3DS" && $platform != "PSVITA" && $platform != "WIIU" && $platform != "N-GAGE" && $platform != "PSX"  && $platform != "WII")
 				{
 					array_push($game -> platform, $platform);
@@ -108,6 +110,7 @@ $months = ["gennaio"];//,"aprile","maggio","giugno","luglio","agosto","settembre
 				curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 				// Disable SSL verification
 				curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
+				usleep(300);
 				$result3 = curl_exec ( $ch );
 				curl_close ( $ch );
 				$someObject3 = json_decode ( $result3 );
