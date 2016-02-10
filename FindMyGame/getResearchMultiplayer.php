@@ -16,6 +16,8 @@ $result = curl_exec($ch);
 curl_close($ch);
 
 $someObject = json_decode($result);
+if(!isset($someObject -> results))
+	return "errore";
 $link=levenshteinMatch(strtolower($name1),$someObject);
 //aggiungere genere da gameE
 if($link=="")

@@ -6,7 +6,7 @@ include "etlEveryEye.php";
 function getGameMerged(){
 $months = ["gennaio"=>"01","febbraio"=>"02","marzo"=>"03","aprile"=>"04","maggio"=>"05","giugno"=>"06","luglio"=>"07","agosto"=>"08","settembre"=>"09","ottobre"=>"10","novembre"=>"11","dicembre"=>"12"];
 $gameNotE=array();
-//$gameMultiplayer=getGameMultiplayer();
+$gameMultiplayer=getGameMultiplayer();
 $gameEveryeye=getGameEveryEye();
 $gameMerged=array();
 $flag=false;

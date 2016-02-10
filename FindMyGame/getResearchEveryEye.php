@@ -10,6 +10,8 @@ function getResearchEveryEye($name)
 	$result = curl_exec ( $ch );
 	curl_close ( $ch );
 	$someObject = json_decode ( $result );
+	if(!isset($someObject -> results))
+		return "errore";
 	$linkSelected = levenshteinMatch($name,$someObject);
 	if($linkSelected == "")
 	{

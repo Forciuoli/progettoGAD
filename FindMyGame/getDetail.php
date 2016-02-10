@@ -32,7 +32,7 @@ echo '<div class="product-details"><!--product-details-->
 										Ritorna all &apos; elenco prodotti
 									</button>
 							<div class="view-product">
-								<img src="'.($row["Img_link"]==""?"/gadProject/Eshopper/images/product-details/imgNO.jpg":$row["Img_link"]).'" alt="" />
+								<img src="'.($row["Img_link"]==""?"/gadProject/FindMyGame/images/product-details/imgNO.jpg":$row["Img_link"]).'" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 
@@ -45,7 +45,7 @@ echo '<div class="product-details"><!--product-details-->
 								<p><b>Platform:</b> '.substr(str_replace("&", ",", $row['Platforms']), 0, strlen($row['Platforms'])-1).'</p>
 							    <p><b>Date:</b> '.$row['Data_ps4'].'</p>
 								<div class="container1">
-									<img src="/gadProject/Eshopper/images/product-details/everyeyeLogo.jpg" style="width:250px;height:100px"/>
+									<img src="/gadProject/FindMyGame/images/product-details/everyeyeLogo.jpg" style="width:250px;height:100px"/>
 								    <div id="activeBorder" class="active-border">
 										  
 								        <div id="circle" class="circle">
@@ -54,7 +54,7 @@ echo '<div class="product-details"><!--product-details-->
 								    </div>
 								</div>
 								<div class="container1">
-								     <img src="/gadProject/Eshopper/images/product-details/multiplayerLogo.png" style="width:250px;height:100px"/> 
+								     <img src="/gadProject/FindMyGame/images/product-details/multiplayerLogo.png" style="width:250px;height:100px"/> 
 								    <div id="activeBorder1" class="active-border">
 								           		
 								        <div id="circle1" class="circle">

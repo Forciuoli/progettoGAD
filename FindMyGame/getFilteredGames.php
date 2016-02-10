@@ -16,17 +16,18 @@ if(isset($_GET["page"]))
 
 	if(isset($_GET["genre"]) && isset($_GET["platform"]))
 	{
-		$genre=$_GET["genre"];
-		$platform=$_GET["platform"];
-		if($genre=="all" && $platform=="all")
+		$genre=strtoupper($_GET["genre"]);
+		
+		$platform=strtoupper($_GET["platform"]);
+		if($genre=="ALL" && $platform=="ALL")
 		{
 			$sql = "SELECT * FROM games LIMIT 12 OFFSET ".($page-1)*12;
 		}
-		else if($genre=="all" && $platform!="all")
+		else if($genre=="ALL" && $platform!="ALL")
 		{
 			$sql = "SELECT * FROM games WHERE Platforms LIKE '%".$platform."%' LIMIT 12 OFFSET ".($page-1)*12;
 		}
-		else if($genre!="all" && $platform=="all")
+		else if($genre!="ALL" && $platform=="ALL")
 		{
 			
 			$sql = "SELECT * FROM games WHERE Genres LIKE '%".$genre."%' LIMIT 12 OFFSET ".($page-1)*12;

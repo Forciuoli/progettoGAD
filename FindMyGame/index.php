@@ -194,8 +194,8 @@ $conn -> close();
 									<li><a href="" onclick="getFilteredGames(this,'','PC','');return false;"> <span class="pull-right"></span>Pc</a></li>
 									<li><a href="" onclick="getFilteredGames(this,'','PS4','');return false;"> <span class="pull-right"></span>Ps4</a></li>
 									<li><a href="" onclick="getFilteredGames(this,'','PS3','');return false;"> <span class="pull-right"></span>Ps3</a></li>
-									<li><a href="" onclick="getFilteredGames(this,'','XbOX 360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>
-									<li><a href="" onclick="getFilteredGames(this,'','Xbox one','');return false;"> <span class="pull-right"></span>Xbox One</a></li>
+									<li><a href="" onclick="getFilteredGames(this,'','XbOX360','');return false;"> <span class="pull-right"></span>Xbox 360</a></li>
+									<li><a href="" onclick="getFilteredGames(this,'','Xboxone','');return false;"> <span class="pull-right"></span>Xbox One</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
@@ -208,7 +208,7 @@ $conn -> close();
 									<div class="product-image-wrapper" style="width:184px;height:367px">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="'.($row["Img_link"]==""?"/gadProject/Eshopper/images/product-details/imgNO.jpg":$row["Img_link"]).'" alt="" style="width:182px;height:256px"/>
+												<img src="'.($row["Img_link"]==""?"/gadProject/FindMyGame/images/product-details/imgNO.jpg":$row["Img_link"]).'" alt="" style="width:182px;height:256px"/>
 												<h2></h2>
 												<p>'.$row["Name"].'</p>
 												<a onclick="getDetailGame('.$row["Id"].');return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Dettagli</a>

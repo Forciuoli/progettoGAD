@@ -208,10 +208,9 @@ function getFilteredGames(elem,genre,platform,page,shift)
 
 function hideDetail()
 {
-    document.getElementById("mainSection").style.display = "";
-    document.getElementById("detailGame").style.display = "none";
-   
-
+    //document.getElementById("mainSection").style.display = "";
+   // document.getElementById("detailGame").style.display = "none";
+	location.reload();
 }
 
 function getGame(nameGame)
@@ -261,6 +260,12 @@ function getGame(nameGame)
 	     if(xhttp.responseText == "")
 	     {
 	    	 alert("Gioco non trovato!");
+		     document.getElementById("dark_cover").style.display = "none";
+	    	 return;
+	     }
+	     if(xhttp.responseText == "errore")
+	     {
+	    	 alert("Non siamo riusciti a recuperare il tuo gioco, riprova più tardi!");
 		     document.getElementById("dark_cover").style.display = "none";
 	    	 return;
 	     }
